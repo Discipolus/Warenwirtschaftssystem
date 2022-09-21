@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Konstrukte
 {
-    internal class Ort
+    public class Ort
     {
         public string Land { get; set; }
         public DeutscheBundesländer Bundesland { get; set; }
@@ -27,5 +27,6 @@ namespace Engine.Konstrukte
             Hausnummerzusatz = hausnummerzusatz;
             Adresszusatz = adresszusatz;
         }
+        public Guid Id { get; set; }
     }
 }

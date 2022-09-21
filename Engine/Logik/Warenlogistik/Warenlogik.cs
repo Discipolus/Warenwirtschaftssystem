@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Engine.Konstrukte;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Engine.Logik.Warenlogistik
 {
@@ -16,103 +19,63 @@ namespace Engine.Logik.Warenlogistik
 
     internal class Warenlogik
     {
-        SortedList<uint, Produkt> produktliste = new();
-        List<Produkt> produktliste2 = new();
-        public void ProduktHinzufuegen(Produkt produkt)
-        {            
-            if (!produktliste.ContainsKey(produkt.Id) && produkt.Id != 0)
+        SortedList<Guid, Produkt> katalog = new();
+        public Warenlogik()
+        {
+            SortedList<Guid, Produkt>? tmp = KatalogSpeichernLaden.KatalogLaden();
+            if (tmp != null)
             {
-                produktliste.Add(produkt.Id, produkt);
-                Console.WriteLine("Produkt \"" + produkt.Name + "\" wurde erfolgreich hinzugefügt.");
+                katalog = tmp;
+            }
+        }
+        public void ProduktDemKatalogHinzufuegen(Produkt produkt)
+        {
+            if (katalog.ContainsKey(produkt.GUID) && produkt.GUID != Guid.Empty)
+            {
+                foreach (KeyValuePair<Ort, int> kv in produkt.OrtUndAnzahl)
+                {
+                    ProduktAufstocken(produkt.GUID, kv);
+                }
+            }
+            else if (produkt.GUID != Guid.Empty)
+            {
+                katalog.Add(produkt.GUID, produkt);
             }
             else
             {
-                for (uint i = 1; i <= produktliste.Count+1; i++)
-                {
-                    if (!produktliste.ContainsKey(i))
-                    {
-                        produkt.Id = i;
-                        produktliste.Add(i, produkt);
-                        Console.WriteLine("Produkt \""+ produkt.Name + "\" hatte eine bereits vergebene ID. Es wurde die neue ID: \" "+ produkt.Id + "\" vergeben und das Produkt wurde erfolgreich hinzugefügt.");
-                        break;
-                    }
-                }
+                produkt.GUID = Guid.NewGuid();
+                katalog.Add(produkt.GUID, produkt);
             }
         }
-        public void ProduktHinzufuegen2(Produkt produkt)
+        public void ProduktAusDemKatalogEntfernen(Produkt produkt)
         {
-            produktliste2.Add(produkt);            
-        }
-        public void ProduktHinzufuegen(Produkt produkt, uint anzahl)
-        {
-            uint maximaleDurchläufe = (uint)produktliste.Count + anzahl;
-            for (uint i = 1; i <= maximaleDurchläufe; i ++)
+            if (produkt != null)
             {
-                if (!produktliste.ContainsKey(i))
+                try
                 {
-                    produkt.Id = i;
-                    produktliste.Add(i, produkt);
-                    anzahl--;
-                    Console.WriteLine("Produkt \"" + produkt.Name + "\" wurde mit der ID: \" " + produkt.Id + "\" erfolgreich hinzugefügt.");
-                    if (anzahl <= 1)
-                    {
-                        break;
-                    }
+                    katalog.Remove(produkt.GUID);
                 }
-            }
-        }
-        public void ProduktEntfernen2(Produkt produkt)
-        {
-            Produkt p = produktliste2.First(x => x.GUID == produkt.GUID);
-            if (p != null)
-            {
-                produktliste2.Remove(p);
-            }
-        }
-        public void ProduktEntfernen(Produkt produkt)
-        {
-            if (produkt.Id == 0)
-            {
-                Console.WriteLine("Zum entfernen angegebenes Produkt hat keine ID. Versuche passendes Produkt zu finden: ");
-                if (produktliste.ContainsValue(produkt)) //ggf durch eigene Abfrage austauschen. Es muss ja nur der Name und ggf Ort übereinstimmen, nicht das komplette Objekt.
+                catch (Exception ex)
                 {
-                    Produkt p = produktliste.ElementAt(produktliste.IndexOfValue(produkt)).Value;
-                    Console.WriteLine("Produkt \"" + produkt.Name + "\"mit der id: \"" + produkt.Id + "\" wurde nicht gefunden und konnte dementsprechend auch nicht entfernt werden. Es wurde allerdings gefunden mit Namen: " + p.Name + " und ID: " + p.Id);
-                    produktliste.Remove(p.Id);
-                }
-                else
-                {
-                    Console.WriteLine("Produkt \"" + produkt.Name + "\"mit der id: \"" + produkt.Id + "\" wurde nicht gefunden und konnte dementsprechend auch nicht entfernt werden.");
+                    Console.WriteLine(ex.Message);
                 }
             }
             else
             {
-                if (produktliste.ContainsKey(produkt.Id))
-                {
-                    produktliste.Remove(produkt.Id);
-                    Console.WriteLine("Produkt \"" + produkt.Name + "\"mit der id: \"" + produkt.Id + "\" wurde gefunden und entfernt.");
-                }
-                else
-                {
-                    Console.WriteLine("Produkt \"" + produkt.Name + "\"mit der id: \"" + produkt.Id + "\" wurde nicht gefunden und konnte dementsprechend auch nicht entfernt werden.");
-                }
+                Console.WriteLine("zu entfernendes Produkt ist null.");
             }
         }
-        public void ProduktEntfernen(uint id)
+        public void ProduktAufstocken(Guid produktId, KeyValuePair<Ort, int> Anzahl)
         {
-            if (produktliste.ContainsKey(id))
-            {                
-                produktliste.Remove(id);
-                Console.WriteLine("Produkt mit der id: \"" + id + "\" wurde gefunden und entfernt.");
-            }
-            else
+            if (katalog.ContainsKey(produktId))
             {
-                Console.WriteLine("Produkt mit der id: \"" + id + "\" wurde nicht gefunden und konnte dementsprechend auch nicht entfernt werden.");
+                katalog[produktId].OrtUndAnzahlHinzufuegen(Anzahl);
             }
         }
-        public SortedList<uint, Produkt> GetProduktliste()
+        public SortedList<Guid, Produkt> GetKatalog()
         {
-            return produktliste;
+            return katalog;
         }
+
     }
 }
