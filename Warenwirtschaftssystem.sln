@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI_WinForms", "GUI_WinForms\GUI_WinForms.csproj", "{F621FEC1-AC06-4C89-B703-444634648F41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI_WPF", "GUI_WPF\GUI_WPF.csproj", "{AD06E5FB-D4AE-4E63-A112-CAC0E6DF8FD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F621FEC1-AC06-4C89-B703-444634648F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F621FEC1-AC06-4C89-B703-444634648F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F621FEC1-AC06-4C89-B703-444634648F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F621FEC1-AC06-4C89-B703-444634648F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD06E5FB-D4AE-4E63-A112-CAC0E6DF8FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD06E5FB-D4AE-4E63-A112-CAC0E6DF8FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD06E5FB-D4AE-4E63-A112-CAC0E6DF8FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD06E5FB-D4AE-4E63-A112-CAC0E6DF8FD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE9F2823-C5CE-4335-8846-799A64074C86}
+	EndGlobalSection
+EndGlobal
