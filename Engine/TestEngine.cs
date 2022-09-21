@@ -12,7 +12,7 @@ namespace Engine
             p.GUID = Guid.NewGuid();
             p.Name = "test1";
             wl.ProduktHinzufuegen(p);
-            p.Name = "test2";
+            p.Name = "test3";
             wl.ProduktHinzufuegen(p, (uint)5);
             wl.ProduktEntfernen((uint)3);
             wl.ProduktEntfernen(p);
