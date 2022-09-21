@@ -49,7 +49,7 @@ namespace Engine.Logik.Warenlogistik
         }
         public void ProduktAusDemKatalogEntfernen(Produkt produkt)
         {
-            if (produkt != null)
+            if (produkt != null & produkt.GUID != Guid.Empty)
             {
                 try
                 {
@@ -62,7 +62,7 @@ namespace Engine.Logik.Warenlogistik
             }
             else
             {
-                Console.WriteLine("zu entfernendes Produkt ist null.");
+                Console.WriteLine("zu entfernendes Produkt ist null. Oder hatte keine ID");
             }
         }
         public void ProduktAufstocken(Guid produktId, KeyValuePair<Ort, int> Anzahl)
@@ -72,6 +72,7 @@ namespace Engine.Logik.Warenlogistik
                 katalog[produktId].OrtUndAnzahlHinzufuegen(Anzahl);
             }
         }
+        public void ProduktReduzieren(Guid produktId, KeyValuePair<Ort, int> Anzahl)
         public SortedList<Guid, Produkt> GetKatalog()
         {
             return katalog;
