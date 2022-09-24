@@ -8,6 +8,7 @@ namespace Engine.Konstrukte
 {
     public class Ort
     {
+        //ggf Lagerplatz hinzufügen in eigener Klasse. Mit Platz (Regale, Stellflächen, wieviel qm ist platz etc.
         public string Land { get; set; }
         public DeutscheBundesländer Bundesland { get; set; }
         public string Ortsname { get; set; }

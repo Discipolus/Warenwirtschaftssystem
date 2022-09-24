@@ -11,7 +11,7 @@ namespace Engine
             Produkt p = new Produkt("test5", new List<KeyValuePair<Ort, int>>());
             p.GUID = Guid.NewGuid();
             p.Name = "test5";
-            wl.ProduktDemKatalogHinzufuegen(p);
+            wl.ProduktDemKatalogHinzufuegen(p);            
             KatalogSpeichernLaden.KatalogSpeichern(wl.GetKatalog());
 
             //SortedList<uint, Produkt> produktliste = wl.GetProduktliste();

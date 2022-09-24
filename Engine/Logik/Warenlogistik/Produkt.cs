@@ -13,10 +13,10 @@ namespace Engine.Logik.Warenlogistik
         {
             Name = name;
             GUID = Guid.NewGuid();
-            OrtUndAnzahl = ortUndAnzahl;
+            OrtUndAnzahl = ortUndAnzahl;            
         }
-        public uint Id { get; set; }
         public string Name { get; set; }
+        public double[] Volumen = new double[3] { 4.1, 4.6, 1 };
         //public Ort AktuellerOrt { get; set; }
         public Guid GUID { get; set; }
         public List<KeyValuePair<Ort, int>> OrtUndAnzahl { get; set; }
