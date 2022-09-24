@@ -13,7 +13,6 @@ namespace Engine
             p.Name = "test5";
             wl.ProduktDemKatalogHinzufuegen(p);            
             KatalogSpeichernLaden.KatalogSpeichern(wl.GetKatalog());
-
             //SortedList<uint, Produkt> produktliste = wl.GetProduktliste();
             //foreach (KeyValuePair<uint, Produkt> kv in produktliste)
             //{
