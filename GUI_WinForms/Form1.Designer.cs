@@ -28,17 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.produktHinzufügen1 = new GUI_WinForms.ProduktHinzufügen();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(376, 391);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
             // 
             // button1
             // 
@@ -50,13 +43,29 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // produktHinzufügen1
+            // 
+            this.produktHinzufügen1.Location = new System.Drawing.Point(12, 41);
+            this.produktHinzufügen1.Name = "produktHinzufügen1";
+            this.produktHinzufügen1.Size = new System.Drawing.Size(571, 295);
+            this.produktHinzufügen1.TabIndex = 2;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(679, 62);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(328, 336);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1055, 451);
             this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.produktHinzufügen1);
+            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -64,8 +73,8 @@
         }
 
         #endregion
-
-        private RichTextBox richTextBox1;
         private Button button1;
+        private ProduktHinzufügen produktHinzufügen1;
+        private RichTextBox richTextBox1;
     }
 }
