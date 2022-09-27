@@ -72,7 +72,7 @@ namespace Engine.Logik.Warenlogistik
                 katalog[produktId].OrtUndAnzahlHinzufuegen(Anzahl);
             }
         }
-        public void ProduktReduzieren(Guid produktId, KeyValuePair<Ort, int> Anzahl)
+        //public void ProduktReduzieren(Guid produktId, KeyValuePair<Ort, int> Anzahl)
         public SortedList<Guid, Produkt> GetKatalog()
         {
             return katalog;
