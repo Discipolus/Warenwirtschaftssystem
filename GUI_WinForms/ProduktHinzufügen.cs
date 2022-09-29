@@ -15,17 +15,36 @@ namespace GUI_WinForms
         public ProduktHinzufügen()
         {
             InitializeComponent();
-            string[] Felder = new string[] {"Name", "Berufung", "Ort" };
-            for (int i = 0; i < Felder.Length; i++)
+            List<UC_TextboxMitLabel> list = new List<UC_TextboxMitLabel>();
+            string[] Felder = new string[] {"Name", "Anzahl", "Ort", "ID" };
+            int maxLaenge = 0;
+            
+            for (int i = Felder.Length-1; i >= 0; i--)
             {
                 UC_TextboxMitLabel UC = new UC_TextboxMitLabel(Felder[i]);
-                UC.Dock = System.Windows.Forms.DockStyle.Top;
-                UC.Font = new System.Drawing.Font("Snap ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                UC.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-                UC.Name = "uC_TextboxMitLabel1";
-                UC.Size = new System.Drawing.Size(571, 28);
+                UC.Location = new Point(0, this.panel_ProduktHinzufügen_Logo.Location.Y + (i+1)*this.panel_ProduktHinzufügen_Logo.Height);
+                UC.Dock = DockStyle.Top;
+                UC.Font = new Font("Snap ITC", 12F, FontStyle.Regular, GraphicsUnit.Point);
+                UC.Margin = new Padding(5, 4, 5, 4);
+                UC.Name = "uC_TextboxMitLabel" + i.ToString();
+                UC.Size = new Size(571, 28);
                 UC.TabIndex = 3+i;
-                this.Controls.Add(UC);
+                foreach (Control l in UC.Controls)
+                {
+                    if (l is Label)
+                    {
+                        if (maxLaenge < l.Size.Width)
+                        {
+                            maxLaenge = l.Size.Width;
+                        }
+                    }
+                }
+                list.Add(UC);
+            }
+            foreach (UC_TextboxMitLabel uc in list)
+            {
+                uc.ResizeUc(maxLaenge);
+                panel_Elemente.Controls.Add(uc);                
             }
         }
 

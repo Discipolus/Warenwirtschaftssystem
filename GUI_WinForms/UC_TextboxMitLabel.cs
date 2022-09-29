@@ -15,13 +15,23 @@ namespace GUI_WinForms
         public UC_TextboxMitLabel(string name)
         {
             InitializeComponent();
-            label1.Name = "lbl_" + name;
-            label1.Text = name + ":";
-            textBox1.Name = "tb_" + name;
+            lbl_Bezeichnung.Name = "lbl_" + name;
+            lbl_Bezeichnung.Text = name + ":";
+            lbl_Bezeichnung.Dock = DockStyle.Left;
+            tb_Wert.Name = "tb_" + name;
+            
+            ResizeUc(lbl_Bezeichnung.Size.Width);
         }
         private void uC_TextboxMitLabel_Resize(object sender, EventArgs e)
         {
-            textBox1.Size = new Size(this.Size.Height, this.Size.Width / 2);
+            ResizeUc(lbl_Bezeichnung.Size.Width);
+        }
+        public void ResizeUc(int maxWithLabel)
+        {            
+            int diff = 10;
+            tb_Wert.Size = new Size(this.Size.Width - maxWithLabel - diff, this.Size.Height);
+            tb_Wert.Location = new Point(maxWithLabel + diff, 0);            
+            this.Refresh();
         }
     }
 }

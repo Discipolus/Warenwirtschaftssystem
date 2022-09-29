@@ -28,36 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lbl_Bezeichnung = new System.Windows.Forms.Label();
+            this.tb_Wert = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // lbl_Bezeichnung
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Font = new System.Drawing.Font("Snap ITC", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.lbl_Bezeichnung.AutoSize = true;
+            this.lbl_Bezeichnung.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lbl_Bezeichnung.Font = new System.Drawing.Font("Snap ITC", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Bezeichnung.Location = new System.Drawing.Point(0, 0);
+            this.lbl_Bezeichnung.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_Bezeichnung.Name = "lbl_Bezeichnung";
+            this.lbl_Bezeichnung.Size = new System.Drawing.Size(202, 25);
+            this.lbl_Bezeichnung.TabIndex = 0;
+            this.lbl_Bezeichnung.Text = "Label123456677";
             // 
-            // textBox1
+            // tb_Wert
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.textBox1.Location = new System.Drawing.Point(300, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(300, 28);
-            this.textBox1.TabIndex = 1;
+            this.tb_Wert.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tb_Wert.Location = new System.Drawing.Point(300, 0);
+            this.tb_Wert.Name = "tb_Wert";
+            this.tb_Wert.Size = new System.Drawing.Size(300, 28);
+            this.tb_Wert.TabIndex = 1;
             // 
             // UC_TextboxMitLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.tb_Wert);
+            this.Controls.Add(this.lbl_Bezeichnung);
             this.Font = new System.Drawing.Font("Snap ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.MaximumSize = new System.Drawing.Size(10000, 28);
@@ -72,7 +73,7 @@
 
         #endregion
 
-        private Label label1;
-        private TextBox textBox1;
+        private Label lbl_Bezeichnung;
+        private TextBox tb_Wert;
     }
 }
