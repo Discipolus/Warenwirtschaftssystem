@@ -11,7 +11,7 @@
     <Compile Update="ProduktHinzufügen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC_TextboxMitLabel.cs">
+    <Compile Update="TextBoxMitLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

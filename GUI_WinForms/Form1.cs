@@ -66,12 +66,19 @@ namespace GUI_WinForms
                 }
             }
             uc.BorderStyle = BorderStyle.None;
-            uc.Dock = DockStyle.Fill;
+            
             uc.Location = new Point(0, 0);
             panel_Views.Tag = uc;
-            panel_Views.Controls.Add(uc);
-            panel_Views.BringToFront();            
             uc.Show();
+
+            panel_Views.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+            uc.AutoSize = true;
+
+            //panel_Views.BringToFront();            
+            //uc.Update();
+            //uc.Refresh();
+            //uc.Show();
         }
 
         #region Hauptmenü
@@ -96,8 +103,7 @@ namespace GUI_WinForms
         #region Warenlogistik Menü
         private void btn_Warenlogistik_Katalog_Hinzufuegen_Click(object sender, EventArgs e)
         {
-           oeffneView(new ProduktHinzufügen());
-           
+           oeffneView(new ProduktHinzufügen(panel_Views.Size));           
         }
 
         #endregion

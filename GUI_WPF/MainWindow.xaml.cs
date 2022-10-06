@@ -23,6 +23,7 @@ namespace GUI_WPF
         public MainWindow()
         {
             InitializeComponent();
+            btn_1.Content = "Hallo Welt";
         }
     }
 }

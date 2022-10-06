@@ -83,7 +83,7 @@
             this.panel_Menueelemente.Margin = new System.Windows.Forms.Padding(4);
             this.panel_Menueelemente.MinimumSize = new System.Drawing.Size(250, 0);
             this.panel_Menueelemente.Name = "panel_Menueelemente";
-            this.panel_Menueelemente.Size = new System.Drawing.Size(250, 547);
+            this.panel_Menueelemente.Size = new System.Drawing.Size(250, 729);
             this.panel_Menueelemente.TabIndex = 5;
             // 
             // button12
@@ -472,14 +472,14 @@
             this.panel_Views.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_Views.Location = new System.Drawing.Point(250, 0);
             this.panel_Views.Name = "panel_Views";
-            this.panel_Views.Size = new System.Drawing.Size(767, 547);
+            this.panel_Views.Size = new System.Drawing.Size(927, 729);
             this.panel_Views.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 547);
+            this.ClientSize = new System.Drawing.Size(1177, 729);
             this.Controls.Add(this.panel_Views);
             this.Controls.Add(this.panel_Menueelemente);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
