@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Logik\Einkauf\" />
+    <Folder Include="Bilder\" />
     <Folder Include="Logik\Verkauf\" />
   </ItemGroup>
 
