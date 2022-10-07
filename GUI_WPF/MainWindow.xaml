@@ -11,15 +11,19 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image Grid.Row="0" Grid.Column="0" Source="C:\Users\Vincent\Pictures\Wallpaper\Unbenannt2.png" Height="200" />
-        <Button Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">Klick mich!</Button>
-        <Button Grid.Row="2" Grid.Column="0">Hallo Welt!</Button>
+        <StackPanel x:Name="Menüleiste" Grid.Row="1">
+            <Button x:Name="btn_Warenlogistik" Click="btn_Warenlogistik_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">                
+                Warenlogistik
+            </Button>
+            <Button x:Name="btn_Warenlogistik_ProduktHinzufuegen" Visibility="Collapsed">Produkt hinzufügen</Button>
+            <Button x:Name="btn_Warenlogistik_ProduktEntfernen" Visibility="Collapsed">Produkt entfernen</Button>
+            <Button Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2" Grid.Column="0">Verkauf</Button>
+        </StackPanel>
     </Grid>
 </Window>

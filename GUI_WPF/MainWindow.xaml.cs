@@ -24,5 +24,18 @@ namespace GUI_WPF
         {
             InitializeComponent();
         }
+        private void btn_Warenlogistik_Click(object sender, RoutedEventArgs e)
+        {
+            if (btn_Warenlogistik_ProduktHinzufuegen.Visibility == Visibility.Collapsed)
+            {
+                btn_Warenlogistik_ProduktEntfernen.Visibility = Visibility.Visible;
+                btn_Warenlogistik_ProduktHinzufuegen.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btn_Warenlogistik_ProduktEntfernen.Visibility = Visibility.Collapsed;
+                btn_Warenlogistik_ProduktHinzufuegen.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }
