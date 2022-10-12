@@ -4,32 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI_WPF" xmlns:viewmodels="clr-namespace:GUI_WPF.ViewModels"
+        xmlns:uc="clr-namespace:GUI_WPF.UserControls" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        FontFamily="Times New Roman" FontSize="18">
+        Title="Warenwirtschaftssystem" Height="650" Width="800" MinHeight="400" MinWidth="600"
+        FontFamily="Book Antiqua" FontSize="20">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Control.Background" Value="{x:Null}" />
+            <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+            <Setter Property="Padding" Value="10,10,0,10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Control.Background" Value="{x:Null}" />
+                    <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Window.DataContext>
         <viewmodels:MainWindowViewModel/>
+       
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image Grid.Row="0" Grid.Column="0" Source="C:\Users\Vincent\Pictures\Wallpaper\Unbenannt2.png" Height="200" />
-        <StackPanel x:Name="Menüleiste" Grid.Row="1">
-            <Button x:Name="btn_Warenlogistik" Click="btn_Warenlogistik_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">                
-                Warenlogistik
-            </Button>
-            <Button x:Name="btn_Warenlogistik_ProduktHinzufuegen" Visibility="Collapsed">Produkt hinzufügen</Button>
-            <Button x:Name="btn_Warenlogistik_ProduktEntfernen" Visibility="Collapsed">Produkt entfernen</Button>
-            <Button Command="{Binding BtnClick}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2" Grid.Column="0">Verkauf</Button>
-        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0">
+            <StackPanel x:Name="Menüleiste" >
+                <Button x:Name="btn_Warenlogistik" Command="{Binding CommandBtnWarenlogistikClick}" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">
+                    Warenlogistik
+                </Button>
+                <StackPanel Visibility="{ Binding Path=SubMenueWarenlogistikVisibility, Converter={StaticResource BoolToVis}}">
+                    <Button Padding="25,10,0,10">Übersicht</Button>
+                    <Button Padding="25,10,0,10">Produkt hinzufügen</Button>
+                    <Button Padding="25,10,0,10">Produkt entfernen</Button>
+                </StackPanel>
+                <Button Command="{Binding CommandBtnClick}" Grid.Row="2" Grid.Column="0">Verkauf</Button>
+                <Button>TralalaI</Button>
+            </StackPanel>
+        </ScrollViewer>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MyProperty}">
          
         </TextBlock>
+        <ListView Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Katalog}">
+            
+        </ListView>
     </Grid>
 </Window>

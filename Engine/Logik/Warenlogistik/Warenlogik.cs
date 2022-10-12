@@ -17,7 +17,7 @@ namespace Engine.Logik.Warenlogistik
     */
 
 
-    internal class Warenlogik
+    public class Warenlogik
     {
         SortedList<Guid, Produkt> katalog = new();
         public Warenlogik()

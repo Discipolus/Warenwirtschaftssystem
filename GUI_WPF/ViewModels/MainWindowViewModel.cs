@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Engine.Logik.Warenlogistik;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,27 +13,64 @@ namespace GUI_WPF.ViewModels
         //booltovisibilityconverter
         //Liste od Observable Collection anzeigen. (listbox / itembox)
         //modelschicht - 
-        private string myProperty;
+        #region DelegateCommands
+        public DelegateCommand CommandBtnWarenlogistikClick { get; set; }
+        #endregion
+
+        #region Propertys        
+        private string _myProperty;
         public string MyProperty
         {
-            get => myProperty;
+            get => _myProperty;
             set
             {
-                SetProperty(ref myProperty, value);
+                SetProperty(ref _myProperty, value);
             }
         }
+        private bool _subMenueWarenlogistikVisibility = false;
+        public bool SubMenueWarenlogistikVisibility
+        {
+            get => _subMenueWarenlogistikVisibility;
+            set
+            {
+                SetProperty(ref _subMenueWarenlogistikVisibility, value);
+            }
+        }
+        private SortedList<Guid, Produkt> _katalog;
+        public SortedList<Guid, Produkt> Katalog
+        {
+            get => _katalog;
+            set
+            {
+                SetProperty(ref _katalog, value);
+            }
+        }
+        Engine.TestEngine tE;
+        #endregion
+
+        #region UserControls
+        UserControls.Uebersicht _uebersicht;
+        #endregion
         public MainWindowViewModel()
         {
-            MyProperty = "Hallo";
-            BtnClick = new DelegateCommand(OnBtnClick);
+            tE = new Engine.TestEngine();
+            Katalog = tE.GetWarenKatalog();
+            _uebersicht = new UserControls.Uebersicht();
+            CommandBtnWarenlogistikClick = new DelegateCommand(OnBtnWarenlogistikClick);
         }
 
-        private void OnBtnClick()
+
+        #region ButtonClickMethods
+        private void OnBtnWarenlogistikClick()
         {
-            MyProperty = "Hallo 234";
-            //throw new NotImplementedException();
+            SubMenueWarenlogistikVisibility = !SubMenueWarenlogistikVisibility;
+            OnBtnUebersichtClick();
         }
+        private void OnBtnUebersichtClick()
+        {
+            
+        }
+        #endregion
 
-        public DelegateCommand BtnClick {get; set;}
     }
 }

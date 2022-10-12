@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUI_WPF
+namespace GUI_WPF.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für Uebersicht.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Uebersicht : UserControl
     {
-        public MainWindow()
+        public Uebersicht()
         {
             InitializeComponent();
         }

@@ -4,8 +4,9 @@ using Engine.Logik.Warenlogistik;
 namespace Engine
 {
     public class TestEngine
-    {
+    {        
         Warenlogik wl = new Warenlogik();
+
         public void Main()
         {
             Produkt p = new Produkt("test5", new List<KeyValuePair<Ort, int>>());
@@ -19,7 +20,11 @@ namespace Engine
             //    Console.WriteLine("Produkt mit Namen " + kv.Value.Name + " mit der ID " + kv.Key + " ist in der Liste vorhanden.");
             //}
         }
-        
+        public SortedList<Guid, Produkt> GetWarenKatalog()
+        {
+            return wl.GetKatalog();
+        }
+
 
     }
 }

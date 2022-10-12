@@ -71,8 +71,6 @@ namespace Engine.Logik.Warenlogistik
             {
                 return null;
             }
-
-
         }
     }
 }
