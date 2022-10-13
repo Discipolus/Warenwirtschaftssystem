@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Konstrukte
 {
-    public enum DeutscheBundesländer
+    internal enum DeutscheBundesländer
     {
         BadenWürttemberg,
         Bayern,
@@ -24,5 +24,11 @@ namespace Engine.Konstrukte
         SachsenAnhalt,
         SchleswigHolstein,
         Thüringen
+    }
+    internal enum LagerEinheitGröße
+    {
+        klein,
+        mittel,
+        groß
     }
 }

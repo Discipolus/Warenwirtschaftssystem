@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Engine.Konstrukte;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -9,70 +11,54 @@ namespace Engine.Logik.Warenlogistik
 {
     internal static class KatalogSpeichernLaden
     {
-        private static readonly string pfad = Environment.CurrentDirectory + "//Katalog.xml";
-        public static void KatalogSpeichern(SortedList<Guid, Produkt> katalog)
+        private static readonly string DateinameKatalog = "Katalog.xml";
+        private static readonly string DateinameLagerhäuser = "Lagerhäuser.xml";
+
+        internal static void KatalogSpeichern(List<KatalogItem> katalog)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Produkt>));
-            FileStream file = File.Create(pfad);
-            xmlSerializer.Serialize(file, ConvertToList(katalog));
-            file.Close();            
+            Speichern<List<KatalogItem>>(katalog, DateinameKatalog);
         }
-        private static List<Produkt>? ConvertToList(SortedList<Guid, Produkt>? katalog)
+        internal static void LagerhäuserSpeichern(List<Lagerhaus> lagerhäuser)
         {
-            if (katalog != null)
-            {
-                List<Produkt> list = new List<Produkt>();
-                foreach (KeyValuePair<Guid, Produkt> kv in katalog)
-                {
-                    list.Add(kv.Value);
-                }
-                return list;
-            }
-            else
-            {
-                return null;
-            }
+            Speichern<List<Lagerhaus>>(lagerhäuser, DateinameLagerhäuser);
         }
-        private static SortedList<Guid, Produkt>? ConvertToSortedList(List<Produkt>? katalog)
+        internal static void Speichern<T>(T item, string name)
         {
-            if (katalog != null)
-            {
-                SortedList<Guid, Produkt> list = new SortedList<Guid, Produkt>();
-                foreach (Produkt p in katalog)
-                {
-                    list.Add(p.GUID, p);
-                }
-                return list;
-            }
-            else
-            {
-                return null;
-            }
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+            FileStream file = File.Create(Environment.CurrentDirectory + "//" + name);
+            xmlSerializer.Serialize(file, item);
+            file.Close();
         }
-        public static SortedList<Guid, Produkt>? KatalogLaden()
+        internal static List<KatalogItem>? KatalogLaden()
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Produkt>));
-            FileStream file = File.Open(pfad, FileMode.Open);
+            return Laden<List<KatalogItem>>(DateinameKatalog);
+        }
+        internal static List<Lagerhaus>? LagerhäuserLaden()
+        {
+            return Laden<List<Lagerhaus>>(DateinameLagerhäuser);
+        }
+        internal static T? Laden<T>(string name)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+            FileStream file = File.Open(Environment.CurrentDirectory + "//" + name, FileMode.Open);
             if (file != null)
-            {
-                List<Produkt>? templist;
+            {                
                 try
                 {
-                    templist = (List<Produkt>?)xmlSerializer.Deserialize(file);
-                    return ConvertToSortedList(templist);
+                    //templist = ((T?)xmlSerializer.Deserialize(file));
+                    return ((T?)xmlSerializer.Deserialize(file));
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("File konnte nicht korrekt gelesen werden: " + ex.Message);
-                    return null;
-                }                
+                    return default(T);
+                }
             }
             else
             {
-                return null;
+                Console.WriteLine("File konnte nicht gefunden werden.");
+                return default(T);
             }
-
-
         }
     }
 }
