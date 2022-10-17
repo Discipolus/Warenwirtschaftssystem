@@ -40,25 +40,28 @@ namespace Engine.Logik.Warenlogistik
         internal static T? Laden<T>(string name)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            FileStream file = File.Open(Environment.CurrentDirectory + "//" + name, FileMode.Open);
-            if (file != null)
-            {                
+            FileStream file;
+            try
+            {
+                file = File.Open(Environment.CurrentDirectory + "//" + name, FileMode.Open);
                 try
                 {
-                    //templist = ((T?)xmlSerializer.Deserialize(file));
-                    return ((T?)xmlSerializer.Deserialize(file));
+                    T? tmp = ((T?)xmlSerializer.Deserialize(file));
+                    file.Close();
+                    return tmp;
                 }
                 catch (Exception ex)
                 {
+                    file.Close();
                     Console.WriteLine("File konnte nicht korrekt gelesen werden: " + ex.Message);
                     return default(T);
                 }
             }
-            else
-            {
+            catch
+            {                
                 Console.WriteLine("File konnte nicht gefunden werden.");
                 return default(T);
-            }
+            }            
         }
     }
 }

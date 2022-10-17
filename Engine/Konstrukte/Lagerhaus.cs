@@ -9,44 +9,42 @@ using System.Threading.Tasks;
 
 namespace Engine.Konstrukte
 {
-    internal class Lagerhaus
+    public class Lagerhaus
     {
         #region Variables
-        Ort _ort;
-        internal int Index { get; set; }
-        internal List<Lagereinheit> Lagerplatz { get; set; }
+        public Ort Ort { get; set; }
+        public int Index { get; set; }
+        public List<Lagereinheit> Lagereinheiten { get; set; }
         #endregion
 
         #region Konstruktoren
-        internal Lagerhaus()
+        public Lagerhaus(Ort ort, int index, List<Lagereinheit> lagereinheiten)
         {
-            _ort = new Ort();
-            Lagerplatz = new List<Lagereinheit>();
+            this.Ort = ort;
+            this.Index = index;
+            this.Lagereinheiten = lagereinheiten;
         }
-
-        internal Lagerhaus(Ort ort)
-        {
-            this._ort = ort;
-            Lagerplatz = new List<Lagereinheit>();
-        }
+        public Lagerhaus(Ort ort, int index) : this(ort, index, new List<Lagereinheit>()) { }
+        public Lagerhaus(int index) : this (new Ort(), index) { }
+        public Lagerhaus() : this(-1) { }
         #endregion
-        internal List<Lagereinheit> GetFreieLagerplätze()
+        public List<Lagereinheit> GetFreieLagerplätze()
         {
-            return GetLagerplätze(Lagerplatz, false);
+            return GetLagerplätze(Lagereinheiten, false);
         }
-        internal List<Lagereinheit> GetFreieLagerplätze(LagerEinheitGröße größe)
+        public List<Lagereinheit> GetFreieLagerplätze(LagerEinheitGröße größe)
         {
-            return GetLagerplätze(Lagerplatz, false, größe);
+            return GetLagerplätze(Lagereinheiten, false, größe);
         }
-        internal List<Lagereinheit> GetBelegteLagerplätze()
+        public List<Lagereinheit> GetBelegteLagerplätze()
         {
-            return GetLagerplätze(Lagerplatz, true);
+            return GetLagerplätze(Lagereinheiten, true);
         }
-        internal List<Lagereinheit> GetBelegteLagerplätze(LagerEinheitGröße größe)
+        public List<Lagereinheit> GetBelegteLagerplätze(LagerEinheitGröße größe)
         {
-            return GetLagerplätze(Lagerplatz, true, größe);
+            return GetLagerplätze(Lagereinheiten, true, größe);
         }
-        internal static List<Lagereinheit> GetLagerplätze(List<Lagereinheit> liste, bool belegt)
+        public static List<Lagereinheit> GetLagerplätze(List<Lagereinheit> liste, bool belegt)
         {
             List<Lagereinheit> tmp = new List<Lagereinheit>();
             foreach (Lagereinheit l in liste)
@@ -58,7 +56,7 @@ namespace Engine.Konstrukte
             }
             return tmp;
         }
-        internal static List<Lagereinheit> GetLagerplätze(List<Lagereinheit> liste, bool belegt, LagerEinheitGröße lagereinheitgröße)
+        public static List<Lagereinheit> GetLagerplätze(List<Lagereinheit> liste, bool belegt, LagerEinheitGröße lagereinheitgröße)
         {
             List<Lagereinheit> tmp = new List<Lagereinheit>();
             foreach (Lagereinheit l in liste)
@@ -70,15 +68,15 @@ namespace Engine.Konstrukte
             }
             return tmp;
         }
-        internal void LagerAufstocken(Guid katalogItemGuid, LagerEinheitGröße gößeneinheit, int anzahl)
+        public void LagerAufstocken(Guid katalogItemGuid, LagerEinheitGröße gößeneinheit, int anzahl)
         {
             for (int i = 0; i < anzahl; i++)
             {
-                int index = Lagerplatz.FindIndex(x => (x.größe == gößeneinheit) && x.belegt == false);
+                int index = Lagereinheiten.FindIndex(x => (x.größe == gößeneinheit) && x.belegt == false);
                 if (index != -1)
                 {
-                    Lagerplatz[index].belegt = true;
-                    Lagerplatz[index].KatalogItemGuid = katalogItemGuid;
+                    Lagereinheiten[index].belegt = true;
+                    Lagereinheiten[index].KatalogItemGuid = katalogItemGuid;
                 }
                 else
                 {
@@ -87,16 +85,16 @@ namespace Engine.Konstrukte
                 }
             }
         }
-        internal void LagerLeeren(Guid katalogItemGuid, int anzahl)
+        public void LagerLeeren(Guid katalogItemGuid, int anzahl)
         {
             if (katalogItemGuid != Guid.Empty)
             {
                 for (int i = 0; i < anzahl; i++)
                 {
-                    int index = Lagerplatz.FindIndex(x => x.KatalogItemGuid == katalogItemGuid);
+                    int index = Lagereinheiten.FindIndex(x => x.KatalogItemGuid == katalogItemGuid);
                     if (index != -1)
                     {
-                        Lagerplatz[index].belegt = false;                        
+                        Lagereinheiten[index].belegt = false;                        
                     }
                     else
                     {

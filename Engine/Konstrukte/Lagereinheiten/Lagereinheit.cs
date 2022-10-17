@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Engine.Konstrukte.Lagereinheiten
 {
-    internal class Lagereinheit
+    public class Lagereinheit
     {
         #region Variables
+        private bool _belegt;
         internal bool belegt
         {
             get
             {
-                return belegt;
+                return _belegt;
             }
             set
             {
@@ -22,7 +23,7 @@ namespace Engine.Konstrukte.Lagereinheiten
                 {
                     KatalogItemGuid = Guid.Empty;                    
                 }
-                belegt = value;
+                _belegt = value;
             }
         }
         internal LagerEinheitGröße größe { get; set; }

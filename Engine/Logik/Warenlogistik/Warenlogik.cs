@@ -24,8 +24,13 @@ namespace Engine.Logik.Warenlogistik
         internal List<Lagerhaus> Lagerhäuser { get; set; }
         internal Warenlogik()
         {
+            ladeWarenkatalog();
+            ladeLagerhäuser();
+
+        }
+        internal void ladeWarenkatalog()
+        {
             List<KatalogItem>? tmp = KatalogSpeichernLaden.KatalogLaden();
-            List<Lagerhaus>? tmp2 = KatalogSpeichernLaden.LagerhäuserLaden();
             if (tmp != null)
             {
                 Katalog = tmp;
@@ -34,6 +39,11 @@ namespace Engine.Logik.Warenlogistik
             {
                 Katalog = new();
             }
+        }
+        internal void ladeLagerhäuser()
+        {
+            List<Lagerhaus>? tmp2 = KatalogSpeichernLaden.LagerhäuserLaden();
+
             if (tmp2 != null)
             {
                 Lagerhäuser = tmp2;
