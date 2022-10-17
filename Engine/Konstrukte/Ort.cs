@@ -9,15 +9,15 @@ namespace Engine.Konstrukte
     public class Ort
     {
         //ggf Lagerplatz hinzufügen in eigener Klasse. Mit Platz (Regale, Stellflächen, wieviel qm ist platz etc.
-        public string Land { get; set; }
-        public DeutscheBundesländer Bundesland { get; set; }
-        public string Ortsname { get; set; }
-        public string PLZ { get; set; }
-        public string Strassenname { get; set; }
-        public int Hausnummer { get; set; }
-        public string Hausnummerzusatz { get; set; }
-        public string Adresszusatz { get; set; }
-        public Ort(string land, DeutscheBundesländer bundesland, string ortsname, string plz, string strassenname, int hausnummer, string hausnummerzusatz, string adresszusatz)
+        internal string Land { get; set; }
+        internal DeutscheBundesländer Bundesland { get; set; }
+        internal string Ortsname { get; set; }
+        internal string PLZ { get; set; }
+        internal string Strassenname { get; set; }
+        internal int Hausnummer { get; set; }
+        internal string Hausnummerzusatz { get; set; }
+        internal string Adresszusatz { get; set; }
+        internal Ort(string land, DeutscheBundesländer bundesland, string ortsname, string plz, string strassenname, int hausnummer, string hausnummerzusatz, string adresszusatz)
         {
             Land = land;
             Bundesland = bundesland;
@@ -28,6 +28,34 @@ namespace Engine.Konstrukte
             Hausnummerzusatz = hausnummerzusatz;
             Adresszusatz = adresszusatz;
         }
-        public Guid Id { get; set; }
+        internal Ort()
+        {
+            Bundesland = DeutscheBundesländer.Niedersachsen;
+            Land = "";            
+            Ortsname = "";
+            PLZ = "";
+            Strassenname = "";
+            Hausnummer = -1;
+            Hausnummerzusatz = "";
+            Adresszusatz = "";
+        }
+        internal bool equals(Ort ort)
+        {
+            if (
+            Bundesland == ort.Bundesland 
+            && Land == ort.Land 
+            && Ortsname == ort.Ortsname 
+            && PLZ == ort.PLZ 
+            && Strassenname == ort.Strassenname 
+            && Hausnummer == ort.Hausnummer 
+            && Hausnummerzusatz == ort.Hausnummerzusatz
+            && Adresszusatz == ort.Adresszusatz
+                )
+            {
+                return true;
+            }
+            return false;
+        }
+        
     }
 }
