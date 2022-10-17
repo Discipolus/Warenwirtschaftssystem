@@ -11,8 +11,9 @@ namespace GUI_WPF.ViewModels
     public class MainWindowViewModel : Prism.Mvvm.BindableBase
     {
         //booltovisibilityconverter
-        //Liste od Observable Collection anzeigen. (listbox / itembox)
-        //modelschicht - 
+        //Liste od Observable Collection (wird als source erwartet. Objekte an listen binden und anzeigen) anzeigen. (listbox / itembox)
+        //modelschicht - recherchieren. Infos einholen (niedrige Prio)
+        //content presenter für View models in xaml
         #region DelegateCommands
         public DelegateCommand CommandBtnWarenlogistikClick { get; set; }
         #endregion
@@ -55,7 +56,7 @@ namespace GUI_WPF.ViewModels
         public MainWindowViewModel()
         {
             tE = new Engine.TestEngine();
-            Katalog = tE.GetWarenKatalog();
+            //Katalog = tE.GetWarenKatalog();
             _uebersicht = new UserControls.Uebersicht();
             CommandBtnWarenlogistikClick = new DelegateCommand(OnBtnWarenlogistikClick);
         }
