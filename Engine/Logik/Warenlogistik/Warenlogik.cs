@@ -42,11 +42,11 @@ namespace Engine.Logik.Warenlogistik
         }
         internal void ladeLagerhäuser()
         {
-            List<Lagerhaus>? tmp2 = KatalogSpeichernLaden.LagerhäuserLaden();
+            List<Lagerhaus>? tmp = KatalogSpeichernLaden.LagerhäuserLaden();
 
-            if (tmp2 != null)
+            if (tmp != null)
             {
-                Lagerhäuser = tmp2;
+                Lagerhäuser = tmp;
             }
             else
             {

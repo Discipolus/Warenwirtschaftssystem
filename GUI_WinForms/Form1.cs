@@ -9,10 +9,10 @@ namespace GUI_WinForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TextWriter writer = new Output(richTextBox1);
-            Console.SetOut(writer);
-            Engine.TestEngine te = new Engine.TestEngine();
-            te.Main();
+            //TextWriter writer = new Output(richTextBox1);
+            //Console.SetOut(writer);
+            //Engine.TestEngine te = new Engine.TestEngine();
+            //te.Main();
         }
     }
 }
