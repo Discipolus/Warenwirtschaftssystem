@@ -9,7 +9,7 @@ namespace Engine.Logik
     internal class Output : TextWriter
     {
         //nicht funktionsfähig. Versuch den Consolenoutput in einen String umzuleiten.
-        
+
 
         public override void Write(bool value)
         {

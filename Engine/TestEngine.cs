@@ -1,4 +1,5 @@
 ﻿using Engine.Konstrukte;
+using Engine.Konstrukte.Lagereinheiten;
 using Engine.Logik.Warenlogistik;
 
 namespace Engine
@@ -6,24 +7,46 @@ namespace Engine
     public class TestEngine
     {
         Warenlogik wl = new Warenlogik();
-        public void Main()
+        public TestEngine()
         {
-            Produkt p = new Produkt();
-            p.GUID = Guid.NewGuid();
-            p.Name = "test1";
-            wl.ProduktHinzufuegen(p);
-            p.Name = "test2";
-            wl.ProduktHinzufuegen(p, (uint)5);
-            wl.ProduktEntfernen((uint)3);
-            wl.ProduktEntfernen(p);
-
-            SortedList<uint, Produkt> produktliste = wl.GetProduktliste();
-            foreach (KeyValuePair<uint, Produkt> kv in produktliste)
-            {
-                Console.WriteLine("Produkt mit Namen " + kv.Value.Name + " mit der ID " + kv.Key + " ist in der Liste vorhanden.");
-            }
+            wl.Lagerhäuser.Add(generiereLagerhaus());
+            wl.Katalog = generiereKatalog();
+            wl.LagerAufstocken(wl.Katalog[0].GUID, 0, 9);
+            KatalogSpeichernLaden.LagerhäuserSpeichern(wl.Lagerhäuser); ;
+            KatalogSpeichernLaden.KatalogSpeichern(wl.Katalog);
         }
-        
+        #region testmethoden
+        private Lagerhaus generiereLagerhaus()
+        {
+            Lagerhaus l = new Lagerhaus(wl.Lagerhäuser.Count);
+            for (int i = 0; i < 10; i++)
+            {
+                Lagereinheit einheit = new Lagereinheit(LagerEinheitGröße.klein);
+                l.Lagereinheiten.Add(einheit);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                Lagereinheit einheit = new Lagereinheit(LagerEinheitGröße.mittel);
+                l.Lagereinheiten.Add(einheit);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                Lagereinheit einheit = new Lagereinheit(LagerEinheitGröße.groß);
+                l.Lagereinheiten.Add(einheit);
+            }
+            return l;
+        }
+        private List<KatalogItem> generiereKatalog()
+        {
+            List<KatalogItem> Katalog = new List<KatalogItem>();
+            for (int i = 0; i < 5; i++)
+            {
+                KatalogItem ki = new KatalogItem("Produkt " + i, new double[3] { 2, 2, 2 });
+                Katalog.Add(ki);
+            }
 
+            return Katalog;
+        }
+        #endregion
     }
 }
