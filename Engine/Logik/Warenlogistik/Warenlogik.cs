@@ -19,64 +19,65 @@ namespace Engine.Logik.Warenlogistik
 
     public class Warenlogik
     {
-        SortedList<Guid, Produkt> katalog = new();
-        public Warenlogik()
+        //public SortedList<Guid, KatalogItem> katalog { get; set; }
+        internal List<KatalogItem> Katalog { get; set; }
+        internal List<Lagerhaus> Lagerhäuser { get; set; }
+        internal Warenlogik()
         {
-            SortedList<Guid, Produkt>? tmp = KatalogSpeichernLaden.KatalogLaden();
+            ladeWarenkatalog();
+            ladeLagerhäuser();
+
+        }
+        internal void ladeWarenkatalog()
+        {
+            List<KatalogItem>? tmp = KatalogSpeichernLaden.KatalogLaden();
             if (tmp != null)
             {
-                katalog = tmp;
-            }
-        }
-        public void ProduktDemKatalogHinzufuegen(Produkt produkt)
-        {
-            if (katalog.ContainsKey(produkt.GUID) && produkt.GUID != Guid.Empty)
-            {
-                foreach (KeyValuePair<Ort, int> kv in produkt.OrtUndAnzahl)
-                {
-                    ProduktAufstocken(produkt.GUID, kv);
-                }
-            }
-            else if (produkt.GUID != Guid.Empty)
-            {
-                katalog.Add(produkt.GUID, produkt);
+                Katalog = tmp;
             }
             else
             {
-                produkt.GUID = Guid.NewGuid();
-                katalog.Add(produkt.GUID, produkt);
+                Katalog = new();
             }
         }
-        public void ProduktAusDemKatalogEntfernen(Produkt produkt)
+        internal void ladeLagerhäuser()
         {
-            if (produkt != null & produkt.GUID != Guid.Empty)
-            {
-                try
-                {
-                    katalog.Remove(produkt.GUID);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            else
-            {
-                Console.WriteLine("zu entfernendes Produkt ist null. Oder hatte keine ID");
-            }
-        }
-        public void ProduktAufstocken(Guid produktId, KeyValuePair<Ort, int> Anzahl)
-        {
-            if (katalog.ContainsKey(produktId))
-            {
-                katalog[produktId].OrtUndAnzahlHinzufuegen(Anzahl);
-            }
-        }
-        //public void ProduktReduzieren(Guid produktId, KeyValuePair<Ort, int> Anzahl)
-        public SortedList<Guid, Produkt> GetKatalog()
-        {
-            return katalog;
-        }
+            List<Lagerhaus>? tmp = KatalogSpeichernLaden.LagerhäuserLaden();
 
+            if (tmp != null)
+            {
+                Lagerhäuser = tmp;
+            }
+            else
+            {
+                Lagerhäuser = new();
+            }
+        }
+        internal void LagerAufstocken(Guid katalogItemGuid, int lagerhausIndex, int anzahl)
+        {
+            KatalogItem? ki = Katalog.Find(x => x.GUID == katalogItemGuid);
+            Lagerhaus? l = Lagerhäuser.Find(x => x.Index == lagerhausIndex);
+            if (l != null && ki != null)
+            {
+                if (!ki.LagerhäuserMitItem.Contains(lagerhausIndex))
+                {
+                    ki.LagerhäuserMitItem.Add(lagerhausIndex);
+                }
+                l.LagerAufstocken(katalogItemGuid,ki.Größenklasse, anzahl);
+            }
+        }
+        internal void LagerLeeren(Guid katalogItemGuid, int lagerhausIndex, int anzahl)
+        {
+            KatalogItem? ki = Katalog.Find(x => x.GUID == katalogItemGuid);
+            Lagerhaus? l = Lagerhäuser.Find(x => x.Index == lagerhausIndex);
+            if (l != null && ki != null)
+            {
+                if (ki.LagerhäuserMitItem.Contains(lagerhausIndex))
+                {
+                    ki.LagerhäuserMitItem.Add(lagerhausIndex);
+                }
+                l.LagerLeeren(katalogItemGuid, anzahl);
+            }
+        }
     }
 }

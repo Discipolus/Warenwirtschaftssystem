@@ -25,4 +25,10 @@ namespace Engine.Konstrukte
         SchleswigHolstein,
         Thüringen
     }
+    public enum LagerEinheitGröße
+    {
+        klein,
+        mittel,
+        groß
+    }
 }
