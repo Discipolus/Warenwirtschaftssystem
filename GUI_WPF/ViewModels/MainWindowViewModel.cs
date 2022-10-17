@@ -36,8 +36,8 @@ namespace GUI_WPF.ViewModels
                 SetProperty(ref _subMenueWarenlogistikVisibility, value);
             }
         }
-        private SortedList<Guid, Produkt> _katalog;
-        public SortedList<Guid, Produkt> Katalog
+        private SortedList<Guid, KatalogItem> _katalog;
+        public SortedList<Guid, KatalogItem> Katalog
         {
             get => _katalog;
             set
@@ -46,6 +46,7 @@ namespace GUI_WPF.ViewModels
             }
         }
         Engine.TestEngine tE;
+        Engine.Interface EngineInterface;
         #endregion
 
         #region UserControls
