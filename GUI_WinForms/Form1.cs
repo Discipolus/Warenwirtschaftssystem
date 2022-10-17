@@ -4,8 +4,7 @@ namespace GUI_WinForms
     {
         public Form1()
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
             versteckeSubMenues();
         }
 
@@ -14,7 +13,6 @@ namespace GUI_WinForms
             //TextWriter writer = new Output(richTextBox1);
             //Console.SetOut(writer);
             //Engine.TestEngine te = new Engine.TestEngine();
-            //te.Main();
         }
         private int setzePanelGroeﬂe(Panel p)
         {
