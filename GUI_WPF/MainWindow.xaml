@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GUI_WPF" xmlns:viewmodels="clr-namespace:GUI_WPF.ViewModels" xmlns:usercontrols="clr-namespace:GUI_WPF.UserControls"
+        xmlns:local="clr-namespace:GUI_WPF" 
+        xmlns:viewmodels="clr-namespace:GUI_WPF.ViewModels" 
+        xmlns:usercontrols="clr-namespace:GUI_WPF.UserControls"
         mc:Ignorable="d"
         Title="Warenwirtschaftssystem" Height="650" Width="800" MinHeight="400" MinWidth="600"
         FontFamily="Book Antiqua" FontSize="20">
@@ -21,10 +23,12 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <DataTemplate DataType="{x:Type viewmodels:UCUebersichtViewModel}">
+            <usercontrols:Uebersicht/>
+        </DataTemplate>
     </Window.Resources>
     <Window.DataContext>
         <viewmodels:MainWindowViewModel/>
-       
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -37,24 +41,27 @@
         </Grid.ColumnDefinitions>
         <Image Grid.Row="0" Grid.Column="0" Source="C:\Users\Vincent\Pictures\Wallpaper\Unbenannt2.png" Height="200" />
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0">
-            <StackPanel x:Name="Menüleiste" >
-                <Button x:Name="btn_Warenlogistik" Command="{Binding CommandBtnWarenlogistikClick}" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">
-                    Warenlogistik
-                </Button>
+            <StackPanel>
+                <Button Command="{Binding CommandBtnWarenlogistikClick}" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1" Content="Warenlogistik"/>
                 <StackPanel Visibility="{ Binding Path=SubMenueWarenlogistikVisibility, Converter={StaticResource BoolToVis}}">
-                    <Button Padding="25,10,0,10">Übersicht</Button>
-                    <Button Padding="25,10,0,10">Produkt hinzufügen</Button>
-                    <Button Padding="25,10,0,10">Produkt entfernen</Button>
+                    <Button Padding="25,10,0,10" Command="{Binding CommandBtnUebersichtClick}" Content="Übersicht"/>
+                    <Button Padding="25,10,0,10" Command="{Binding CommandBtnKatalogClick}" Content="Katalog"/>
+                    <StackPanel Visibility="{Binding Path=SubMenueKatalogVisibility, Converter={StaticResource BoolToVis}}">
+                        <Button Padding="35,10,0,10" Command="{Binding CommandBtnHinzufuegenClick}">Hinzufügen</Button>
+                        <Button Padding="35,10,0,10" Command="{Binding CommandBtnEntfernenClick}">Entfernen</Button>
+                    </StackPanel>
+                    <Button Padding="25,10,0,10" Command="{Binding CommandBtnProdukteClick}">Produkte</Button>
+                    <StackPanel Visibility="{Binding Path=SubMenueProdukteVisibility, Converter={StaticResource BoolToVis}}">
+                        <Button Padding="35,10,0,10" Command="{Binding CommandBtnAufstockenClick}">aufstocken</Button>
+                        <Button Padding="35,10,0,10" Command="{Binding CommandBtnAuslagernClick}">auslagern</Button>
+                    </StackPanel>
                 </StackPanel>
-                <Button Command="{Binding CommandBtnClick}" Grid.Row="2" Grid.Column="0">Verkauf</Button>
-                <Button>TralalaI</Button>
+                <Button>Verkauf</Button>
+                <Button>Einkauf</Button>
             </StackPanel>
         </ScrollViewer>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MyProperty}">
-         
-        </TextBlock>
-        <ListView Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Katalog}">
-            
-        </ListView>
+        <ContentControl Content="{Binding SelectedView}" Grid.Column="1" Grid.RowSpan="2"/>
+
+
     </Grid>
 </Window>

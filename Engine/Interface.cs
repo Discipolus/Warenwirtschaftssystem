@@ -9,7 +9,13 @@ namespace Engine
 {
     public class Interface
     {
+        
         Warenlogik wl = new Warenlogik();
+        public Interface()
+        {
+            TestEngine engine = new TestEngine();
+            wl = engine.wl;
+        }
         public void ProduktKatalogHinzufuegen()
         {
 
@@ -18,9 +24,21 @@ namespace Engine
         {
 
         }
-        public void GetKatalog()
+        public List<string[]> GetKatalog()
         {
+            List<string[]> list = new List<string[]>();
+            list.Add(new string[5] { "ID","Name","Größenklasse","Maße (x|y|z) [m]","gelagert in"});
+            foreach (KatalogItem item in wl.Katalog)
+            {
+                string[] s = item.ToString().Split(';');
+                list.Add(s);
+            }
 
+            return list;
+        }
+        public List<KatalogItem> GetSpecificKatalog()
+        {
+            return wl.Katalog;
         }
         public void GetLagerhäuser()
         {

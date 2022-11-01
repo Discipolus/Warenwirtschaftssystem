@@ -2,6 +2,7 @@
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,24 +11,40 @@ namespace GUI_WPF.ViewModels
 {
     public class MainWindowViewModel : Prism.Mvvm.BindableBase
     {
-        //booltovisibilityconverter
         //Liste od Observable Collection (wird als source erwartet. Objekte an listen binden und anzeigen) anzeigen. (listbox / itembox)
         //modelschicht - recherchieren. Infos einholen (niedrige Prio)
         //content presenter für View models in xaml
         #region DelegateCommands
+
+        #region Menueleiste
+
+        #region Warenlogistik
         public DelegateCommand CommandBtnWarenlogistikClick { get; set; }
+        public DelegateCommand CommandBtnUebersichtClick { get; set; }
+        public DelegateCommand CommandBtnKatalogClick { get; set; }
+        public DelegateCommand CommandBtnProdukteClick { get; set; }
+        
+        #region Katalog
+        public DelegateCommand CommandBtnHinzufuegenClick { get; set; }
+        public DelegateCommand CommandBtnEntfernenClick { get; set; }
+        #endregion
+
+        #region Produkte        
+        public DelegateCommand CommandBtnAufstockenClick { get; set; }
+        public DelegateCommand CommandBtnAuslagernClick { get; set; }
+        #endregion
+
+        #endregion
+
+        #endregion
+
         #endregion
 
         #region Propertys        
-        private string _myProperty;
-        public string MyProperty
-        {
-            get => _myProperty;
-            set
-            {
-                SetProperty(ref _myProperty, value);
-            }
-        }
+
+        #region Visibility
+
+        #region MenüItems
         private bool _subMenueWarenlogistikVisibility = false;
         public bool SubMenueWarenlogistikVisibility
         {
@@ -37,8 +54,48 @@ namespace GUI_WPF.ViewModels
                 SetProperty(ref _subMenueWarenlogistikVisibility, value);
             }
         }
-        private SortedList<Guid, KatalogItem> _katalog;
-        public SortedList<Guid, KatalogItem> Katalog
+
+        private bool _subMenueProdukteVisibility = false;
+        public bool SubMenueProdukteVisibility
+        {
+            get => _subMenueProdukteVisibility;
+            set
+            {
+                SetProperty(ref _subMenueProdukteVisibility, value);
+            }
+        }
+
+        private bool _subMenueKatalogVisibility = false;
+        public bool SubMenueKatalogVisibility
+        {
+            get => _subMenueKatalogVisibility;
+            set
+            {
+                SetProperty(ref _subMenueKatalogVisibility, value);
+            }
+        }
+        #endregion
+
+        #region UserControls
+        //private bool _ucUebersichtVisibility = false;
+        //public bool UCUebersichtVisibility
+        //{
+        //    get => _ucUebersichtVisibility;
+        //    set
+        //    {
+        //        if (value)
+        //        {
+        //            HideAllUserControls();
+        //        }
+        //        SetProperty(ref _ucUebersichtVisibility, value);
+        //    }
+        //}
+        #endregion
+
+        #endregion
+
+        private List<string[]> _katalog;
+        public List<string[]> Katalog
         {
             get => _katalog;
             set
@@ -46,20 +103,48 @@ namespace GUI_WPF.ViewModels
                 SetProperty(ref _katalog, value);
             }
         }
-        Engine.TestEngine tE;
+
+
+        private Prism.Mvvm.BindableBase? _selectedView;
+        public Prism.Mvvm.BindableBase? SelectedView
+        {
+            get => _selectedView;
+            set
+            {
+                SetProperty(ref _selectedView, value);
+            }
+        }
+        #endregion
+
+        #region variables
         Engine.Interface EngineInterface;
         #endregion
 
-        #region UserControls
-        UserControls.Uebersicht _uebersicht;
-        #endregion
         public MainWindowViewModel()
         {
-            tE = new Engine.TestEngine();
-            //Katalog = tE.GetWarenKatalog();
-            _uebersicht = new UserControls.Uebersicht();
-            CommandBtnWarenlogistikClick = new DelegateCommand(OnBtnWarenlogistikClick);
+            EngineInterface = new Engine.Interface();
+            Katalog = EngineInterface.GetKatalog();
+            
+            InitializeCommands();
+            
         }
+        private void InitializeCommands()
+        {
+            CommandBtnWarenlogistikClick = new DelegateCommand(OnBtnWarenlogistikClick);
+            CommandBtnUebersichtClick = new DelegateCommand(OnBtnUebersichtClick);
+            CommandBtnKatalogClick = new DelegateCommand(OnBtnKatalogClick);
+            CommandBtnProdukteClick = new DelegateCommand(OnBtnProdukteClick);
+
+            CommandBtnHinzufuegenClick = new DelegateCommand(OnBtnHinzufuegenClick);
+            CommandBtnEntfernenClick = new DelegateCommand(OnBtnEntfernenClick);
+
+            CommandBtnAufstockenClick = new DelegateCommand(OnBtnAufstockenClick);
+            CommandBtnAuslagernClick = new DelegateCommand(OnBtnAuslagernClick);
+        }
+        //private void HideAllUserControls()
+        //{
+        //    UebersichtVisibility = false;
+        //}
 
 
         #region ButtonClickMethods
@@ -70,8 +155,36 @@ namespace GUI_WPF.ViewModels
         }
         private void OnBtnUebersichtClick()
         {
-            
+            SelectedView = new UCUebersichtViewModel(EngineInterface.GetSpecificKatalog());
         }
+        private void OnBtnKatalogClick()
+        {
+            SubMenueKatalogVisibility = !SubMenueKatalogVisibility;
+        }
+        private void OnBtnProdukteClick()
+        {
+            SubMenueProdukteVisibility = !SubMenueProdukteVisibility;
+        }
+
+        private void OnBtnHinzufuegenClick()
+        {
+
+        }
+        private void OnBtnEntfernenClick()
+        {
+
+        }
+        private void OnBtnAufstockenClick()
+        {
+
+        }
+        private void OnBtnAuslagernClick()
+        {
+
+        }
+
+
+
         #endregion
 
     }

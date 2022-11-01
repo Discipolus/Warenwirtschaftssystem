@@ -70,5 +70,31 @@ namespace Engine.Logik.Warenlogistik
             //zu implementieren
             return LagerEinheitGröße.klein;
         }
+        public override string ToString()
+        {
+            return ToString(';');
+        }
+        public string ToString(char seperator)
+        {
+            string value;
+            value = GUID.ToString() + seperator + " " + Name;
+            switch (Größenklasse)
+            {
+                case LagerEinheitGröße.klein:
+                    value += seperator + " klein";
+                    break;
+                case LagerEinheitGröße.mittel:
+                    value += seperator + " mittel";
+                    break;
+                case LagerEinheitGröße.groß:
+                    value += seperator + " groß";
+                    break;
+                default:
+                    break;
+            }
+            value += seperator + " " + String.Join("|", Maße);
+            value += seperator + " " + String.Join(",", LagerhäuserMitItem);
+            return value;
+        }
     }
 }

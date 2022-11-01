@@ -6,7 +6,7 @@ namespace Engine
 {
     public class TestEngine
     {        
-        Warenlogik wl = new Warenlogik();
+        public Warenlogik wl = new Warenlogik();
         public TestEngine()
         {
             wl.Lagerhäuser.Add(generiereLagerhaus());
