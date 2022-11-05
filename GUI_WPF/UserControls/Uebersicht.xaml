@@ -12,14 +12,23 @@
     </UserControl.DataContext>
     <Grid>
         <ListView ItemsSource="{Binding testliste}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Maße" DisplayMemberBinding="{Binding Maße}" Width="60"/>
+                    <GridViewColumn Header="Größenklasse" DisplayMemberBinding="{Binding Größenklasse}"/>
+                    <GridViewColumn Header="GUID" DisplayMemberBinding="{Binding GUID}"/>
+                    <GridViewColumn Header="vorhanden in Lagerhäusern" DisplayMemberBinding="{Binding LagerhäuserMitItemString}"/>
+                </GridView>
+            </ListView.View>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}" Margin="3,0"/>
-                        <TextBlock Text="{Binding Maße}"/>
+                        <ListView ItemsSource="{Binding Maße}"/>
                         <TextBlock Text="{Binding Größenklasse}" />
-                        <TextBlock Text="{Binding Größenklasse}" />
-                        <TextBlock Text="{Binding Größenklasse}" />
+                        <TextBlock Text="{Binding GUID}" />
+                        <ListView ItemsSource="{Binding LagerhäuserMitItem}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

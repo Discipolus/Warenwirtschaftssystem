@@ -6,7 +6,7 @@ namespace Engine
 {
     public class TestEngine
     {        
-        public Warenlogik wl = new Warenlogik();
+        internal Warenlogik wl = new Warenlogik();
         public TestEngine()
         {
             wl.Lagerhäuser.Add(generiereLagerhaus());
@@ -41,8 +41,8 @@ namespace Engine
             List<KatalogItem> Katalog = new List<KatalogItem>();
             for (int i = 0; i < 5; i++)
             {
-                KatalogItem ki = new KatalogItem("Produkt " + i, new double[3] { 2, 2, 2 });
-                Katalog.Add(ki);
+                KatalogItem ki = new KatalogItem("Produkt " + i, new MaßeTemplate( 2, 2, 2 ));
+                wl.KatalogItemDemKatalogHinzufuegen(ki);
             }
 
             return Katalog;

@@ -1,4 +1,5 @@
-﻿using Engine.Logik.Warenlogistik;
+﻿using Engine.Konstrukte;
+using Engine.Logik.Warenlogistik;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,14 @@ namespace Engine
         Warenlogik wl = new Warenlogik();
         public Interface()
         {
+
+        }
+        public void Testrun()
+        {
             TestEngine engine = new TestEngine();
             wl = engine.wl;
         }
-        public void ProduktKatalogHinzufuegen()
-        {
 
-        }
         public void ProduktAusKatalogEntfernen()
         {
 

@@ -1,4 +1,5 @@
-﻿using Engine.Logik.Warenlogistik;
+﻿using Engine.Konstrukte;
+using Engine.Logik.Warenlogistik;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,11 +14,11 @@ namespace GUI_WPF.ViewModels
         private static List<KatalogItem> _testliste;
         public static List<KatalogItem> testliste { get; set; } = new List<KatalogItem>()
         {
-            new KatalogItem("Produkt 1", new double[3] {1,1,1}, 1),
-            new KatalogItem("Produkt 2", new double[3] {2,2,2}, 2),
-            new KatalogItem("Produkt 3", new double[3] {6,1,2}, 1),
-            new KatalogItem("Produkt 4", new double[3] {5,5,3}, 2),
-            new KatalogItem("Produkt 5", new double[3] {1,1,1}, 2)
+            new KatalogItem("Produkt 1", new MaßeTemplate( 1,1,1), 1),
+            new KatalogItem("Produkt 2", new MaßeTemplate(2,2,2), 2),
+            new KatalogItem("Produkt 3", new MaßeTemplate(6,1,2), 1),
+            new KatalogItem("Produkt 4", new MaßeTemplate(5,5,3), 2),
+            new KatalogItem("Produkt 5", new MaßeTemplate(1,1,1), 2)
         };
 
         #region Propertys

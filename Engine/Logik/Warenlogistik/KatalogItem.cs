@@ -11,50 +11,39 @@ namespace Engine.Logik.Warenlogistik
     {
         #region Variables
         public string Name { get; set; }
-        private double[] _Maße;
-        public double[] Maße
-        {
-            get => _Maße;
-            set
-            {
-                if (value != null)
-                {
-                    if (value.Length == 3)
-                    {
-                        _Maße = value;
-                    }
-                    else
-                    {
-                        Console.WriteLine("KatalogItem (" + Name + ")..setVolume: value has not a length of 3.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("KatalogItem (" + Name + ")..setVolume: value is null.");
-                }
-            }
-
-        }
+        public MaßeTemplate Maße { get; set; }
         public LagerEinheitGröße Größenklasse { get; set;}
         public List<int> LagerhäuserMitItem { get; set; }
+        public string LagerhäuserMitItemString
+        { 
+            get
+            {
+                string s = "";
+                foreach (int i in LagerhäuserMitItem)
+                {
+                    s += i + " ";
+                }
+                return s;
+            }
+        }
         public Guid GUID { get; set; }
         #endregion
 
         #region Konstruktoren
-        public KatalogItem(string name, double[] maße, int lagerhausIndex) : this(name, maße)
+        public KatalogItem(string name, MaßeTemplate maße, int lagerhausIndex) : this(name, maße)
         {
             LagerhäuserMitItem = new List<int> { lagerhausIndex };
         }
-        public KatalogItem(string name, double[] maße)
+        public KatalogItem(string name, MaßeTemplate maße)
         {
             LagerhäuserMitItem = new List<int>();
             Name = name;
             Maße = maße;
-            Größenklasse = getGrößenklasseFromMaße(maße);
+            Größenklasse = getGrößenklasseFromMaße(Maße);
             GUID = Guid.NewGuid();
         }
 
-        public KatalogItem() : this("", new double[3] {0,0,0})
+        public KatalogItem() : this("", new MaßeTemplate())
         {  
             GUID = Guid.Empty;
         }
@@ -65,7 +54,7 @@ namespace Engine.Logik.Warenlogistik
         {
             return GUID != Guid.Empty;
         }
-        public static LagerEinheitGröße getGrößenklasseFromMaße(double[] maße)
+        public static LagerEinheitGröße getGrößenklasseFromMaße(MaßeTemplate maße)
         {
             //zu implementieren
             return LagerEinheitGröße.klein;

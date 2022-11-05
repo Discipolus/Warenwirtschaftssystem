@@ -94,8 +94,8 @@ namespace GUI_WPF.ViewModels
 
         #endregion
 
-        private List<string[]> _katalog;
-        public List<string[]> Katalog
+        private List<KatalogItem> _katalog;
+        public List<KatalogItem> Katalog
         {
             get => _katalog;
             set
@@ -123,7 +123,8 @@ namespace GUI_WPF.ViewModels
         public MainWindowViewModel()
         {
             EngineInterface = new Engine.Interface();
-            Katalog = EngineInterface.GetKatalog();
+            EngineInterface.Testrun();
+            Katalog = EngineInterface.GetSpecificKatalog();
             
             InitializeCommands();
             
