@@ -26,6 +26,9 @@
         <DataTemplate DataType="{x:Type viewmodels:UCUebersichtViewModel}">
             <usercontrols:Uebersicht/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:UCKatalogItemDialogViewModel}">
+            <usercontrols:KatalogItemDialog/>
+        </DataTemplate>
     </Window.Resources>
     <Window.DataContext>
         <viewmodels:MainWindowViewModel/>

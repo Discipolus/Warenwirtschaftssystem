@@ -11,7 +11,7 @@ namespace Engine.Konstrukte.Lagereinheiten
     {
         #region Variables
         private bool _belegt;
-        internal bool belegt
+        public bool belegt
         {
             get
             {
@@ -26,20 +26,20 @@ namespace Engine.Konstrukte.Lagereinheiten
                 _belegt = value;
             }
         }
-        internal LagerEinheitGröße größe { get; set; }
-        internal Guid KatalogItemGuid { get; set; }
+        public LagerEinheitGröße größe { get; set; }
+        public Guid KatalogItemGuid { get; set; }
         #endregion
 
         #region Konstruktoren
-        internal Lagereinheit(bool belegt, LagerEinheitGröße größe, Guid katalogItemGuid)
+        public Lagereinheit(bool belegt, LagerEinheitGröße größe, Guid katalogItemGuid)
         {
             this.belegt = belegt;
             this.größe = größe;
             KatalogItemGuid = katalogItemGuid;
         }
 
-        internal Lagereinheit(LagerEinheitGröße größe) : this(false, größe, Guid.Empty) { }
-        internal Lagereinheit() : this(false, LagerEinheitGröße.klein, Guid.Empty) { }
+        public Lagereinheit(LagerEinheitGröße größe) : this(false, größe, Guid.Empty) { }
+        public Lagereinheit() : this(false, LagerEinheitGröße.klein, Guid.Empty) { }
 
         #endregion
     }

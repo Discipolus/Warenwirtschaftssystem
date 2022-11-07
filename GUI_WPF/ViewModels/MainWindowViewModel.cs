@@ -123,7 +123,7 @@ namespace GUI_WPF.ViewModels
         public MainWindowViewModel()
         {
             EngineInterface = new Engine.Interface();
-            EngineInterface.Testrun();
+            //EngineInterface.Testrun();
             Katalog = EngineInterface.GetSpecificKatalog();
             
             InitializeCommands();
@@ -169,11 +169,11 @@ namespace GUI_WPF.ViewModels
 
         private void OnBtnHinzufuegenClick()
         {
-
+            SelectedView = new UCKatalogItemDialogViewModel();
         }
         private void OnBtnEntfernenClick()
         {
-
+            SelectedView = new UCKatalogItemDialogViewModel();
         }
         private void OnBtnAufstockenClick()
         {

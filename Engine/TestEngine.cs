@@ -10,7 +10,8 @@ namespace Engine
         public TestEngine()
         {
             wl.Lagerhäuser.Add(generiereLagerhaus());
-            wl.Katalog = generiereKatalog();
+            generiereKatalog();
+            
             wl.LagerAufstocken(wl.Katalog[0].GUID, 0, 9);
             KatalogSpeichernLaden.LagerhäuserSpeichern(wl.Lagerhäuser); ;
             KatalogSpeichernLaden.KatalogSpeichern(wl.Katalog);

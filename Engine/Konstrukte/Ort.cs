@@ -8,7 +8,6 @@ namespace Engine.Konstrukte
 {
     public class Ort
     {
-        //ggf Lagerplatz hinzufügen in eigener Klasse. Mit Platz (Regale, Stellflächen, wieviel qm ist platz etc.
         internal string Land { get; set; }
         internal DeutscheBundesländer Bundesland { get; set; }
         internal string Ortsname { get; set; }
@@ -28,33 +27,27 @@ namespace Engine.Konstrukte
             Hausnummerzusatz = hausnummerzusatz;
             Adresszusatz = adresszusatz;
         }
-        internal Ort()
-        {
-            Bundesland = DeutscheBundesländer.Niedersachsen;
-            Land = "";            
-            Ortsname = "";
-            PLZ = "";
-            Strassenname = "";
-            Hausnummer = -1;
-            Hausnummerzusatz = "";
-            Adresszusatz = "";
-        }
-        internal bool equals(Ort ort)
+        internal Ort() : this("", DeutscheBundesländer.Niedersachsen, "", "", "", -1, "", "") {}
+        internal static bool equals(Ort ort1, Ort ort2)
         {
             if (
-            Bundesland == ort.Bundesland 
-            && Land == ort.Land 
-            && Ortsname == ort.Ortsname 
-            && PLZ == ort.PLZ 
-            && Strassenname == ort.Strassenname 
-            && Hausnummer == ort.Hausnummer 
-            && Hausnummerzusatz == ort.Hausnummerzusatz
-            && Adresszusatz == ort.Adresszusatz
+            ort2.Bundesland == ort1.Bundesland 
+            && ort2.Land == ort1.Land 
+            && ort2.Ortsname == ort1.Ortsname 
+            && ort2.PLZ == ort1.PLZ 
+            && ort2.Strassenname == ort1.Strassenname 
+            && ort2.Hausnummer == ort1.Hausnummer 
+            && ort2.Hausnummerzusatz == ort1.Hausnummerzusatz
+            && ort2.Adresszusatz == ort1.Adresszusatz
                 )
             {
                 return true;
             }
             return false;
+        }
+        internal bool equals(Ort ort)
+        {
+            return equals(this, ort);
         }
         
     }

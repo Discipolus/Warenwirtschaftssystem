@@ -11,11 +11,11 @@
         <viewmodels:UCUebersichtViewModel/>
     </UserControl.DataContext>
     <Grid>
-        <ListView ItemsSource="{Binding testliste}">
+        <ListView ItemsSource="{Binding KatalogItems}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Maße" DisplayMemberBinding="{Binding Maße}" Width="60"/>
+                    <GridViewColumn Header="Maße" DisplayMemberBinding="{Binding Maße}"/>
                     <GridViewColumn Header="Größenklasse" DisplayMemberBinding="{Binding Größenklasse}"/>
                     <GridViewColumn Header="GUID" DisplayMemberBinding="{Binding GUID}"/>
                     <GridViewColumn Header="vorhanden in Lagerhäusern" DisplayMemberBinding="{Binding LagerhäuserMitItemString}"/>

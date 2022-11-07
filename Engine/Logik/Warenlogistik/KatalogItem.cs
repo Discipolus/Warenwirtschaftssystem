@@ -30,23 +30,17 @@ namespace Engine.Logik.Warenlogistik
         #endregion
 
         #region Konstruktoren
-        public KatalogItem(string name, MaßeTemplate maße, int lagerhausIndex) : this(name, maße)
+        public KatalogItem(string name, MaßeTemplate maße, List<int> lagerhäuser, Guid guid)
         {
-            LagerhäuserMitItem = new List<int> { lagerhausIndex };
-        }
-        public KatalogItem(string name, MaßeTemplate maße)
-        {
-            LagerhäuserMitItem = new List<int>();
             Name = name;
             Maße = maße;
+            LagerhäuserMitItem = lagerhäuser;
             Größenklasse = getGrößenklasseFromMaße(Maße);
-            GUID = Guid.NewGuid();
+            GUID = guid;
         }
-
-        public KatalogItem() : this("", new MaßeTemplate())
-        {  
-            GUID = Guid.Empty;
-        }
+        public KatalogItem(string name, MaßeTemplate maße, int lagerhausIndex) : this(name, maße, new List<int> { lagerhausIndex }, Guid.NewGuid()) {}
+        public KatalogItem(string name, MaßeTemplate maße) : this(name, maße, new List<int>(), Guid.NewGuid()) {}
+        public KatalogItem() : this("", new MaßeTemplate()) {}
 
         #endregion
 

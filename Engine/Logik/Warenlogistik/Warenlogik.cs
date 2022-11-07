@@ -1,4 +1,5 @@
 ﻿using Engine.Konstrukte;
+using Engine.Konstrukte.Lagereinheiten;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,14 @@ namespace Engine.Logik.Warenlogistik
     {
         //public SortedList<Guid, KatalogItem> katalog { get; set; }
         internal List<KatalogItem> Katalog { get; private set; }
-        internal List<Lagerhaus> Lagerhäuser { get; private set; }
+        internal List<Lagerhaus> Lagerhäuser { get; set; }
         internal Warenlogik()
         {
-            ladeWarenkatalog();
-            ladeLagerhäuser();
+            LadeWarenkatalog();
+            LadeLagerhäuser();
 
         }
-        internal void ladeWarenkatalog()
+        internal void LadeWarenkatalog()
         {
             List<KatalogItem>? tmp = KatalogSpeichernLaden.KatalogLaden();
             if (tmp != null)
@@ -41,7 +42,7 @@ namespace Engine.Logik.Warenlogistik
                 Katalog = new();
             }
         }
-        internal void ladeLagerhäuser()
+        internal void LadeLagerhäuser()
         {
             List<Lagerhaus>? tmp = KatalogSpeichernLaden.LagerhäuserLaden();
 
@@ -54,6 +55,10 @@ namespace Engine.Logik.Warenlogistik
                 Lagerhäuser = new();
             }
         }
+        //internal void LagerHinzufuegen(Ort adresse, List<Lagereinheit> lagereinheiten)
+        //{
+        //    Lagerhäuser.Add(new Lagerhaus(adresse, Lagerhäuser.Count, lagereinheiten));
+        //}
         internal void KatalogItemDemKatalogHinzufuegen(string name, MaßeTemplate maße, int lagerhausindex, int anzahl)
         {
             KatalogItem katalogItem;
@@ -72,17 +77,9 @@ namespace Engine.Logik.Warenlogistik
         }
         internal void KatalogItemDemKatalogHinzufuegen(KatalogItem ki)
         {
-            if (ki.LagerhäuserMitItem == null || ki.LagerhäuserMitItem.Count == 0)
-            {
-                KatalogItemDemKatalogHinzufuegen(ki.Name, ki.Maße);
-            }
-            else
-            {
-                //ToDo
-                //KatalogItemDemKatalogHinzufuegen(ki.Name, ki.Maße, ki.)
-            }
+            Katalog.Add(ki);
         }
-        public void KatalogItemDemKatalogHinzufuegen(string name, MaßeTemplate maße)
+        internal void KatalogItemDemKatalogHinzufuegen(string name, MaßeTemplate maße)
         {
             Katalog.Add(new KatalogItem(name, maße));
         }

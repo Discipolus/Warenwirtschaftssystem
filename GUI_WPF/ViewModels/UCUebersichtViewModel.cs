@@ -11,27 +11,17 @@ namespace GUI_WPF.ViewModels
 {
     public class UCUebersichtViewModel : Prism.Mvvm.BindableBase
     {
-        private static List<KatalogItem> _testliste;
-        public static List<KatalogItem> testliste { get; set; } = new List<KatalogItem>()
-        {
-            new KatalogItem("Produkt 1", new MaßeTemplate( 1,1,1), 1),
-            new KatalogItem("Produkt 2", new MaßeTemplate(2,2,2), 2),
-            new KatalogItem("Produkt 3", new MaßeTemplate(6,1,2), 1),
-            new KatalogItem("Produkt 4", new MaßeTemplate(5,5,3), 2),
-            new KatalogItem("Produkt 5", new MaßeTemplate(1,1,1), 2)
-        };
-
         #region Propertys
-        private ObservableCollection<string[]>? _katalogDarstellung;
-        public ObservableCollection<string[]>? KatalogDarstellung
-        {
-            get => _katalogDarstellung;
-            set
-            {
-                SetProperty(ref _katalogDarstellung, value);
-            }
-        }
-        private List<KatalogItem>? _katalogItems;
+        //private ObservableCollection<KatalogItem>? _katalogDarstellung;
+        //public ObservableCollection<KatalogItem>? KatalogDarstellung
+        //{
+        //    get => _katalogDarstellung;
+        //    set
+        //    {
+        //        SetProperty(ref _katalogDarstellung, value);
+        //    }
+        //}
+        private static List<KatalogItem>? _katalogItems;
         public List<KatalogItem>? KatalogItems
         {
             get => _katalogItems;
@@ -41,17 +31,31 @@ namespace GUI_WPF.ViewModels
             }
         }
         #endregion
-        public UCUebersichtViewModel() : this(new List<string[]>())
-        {
-             
-        }
-        public UCUebersichtViewModel(List<string[]> darzustellendeElemente)
-        {
-            KatalogDarstellung = new ObservableCollection<string[]>(darzustellendeElemente);
-        }
+        public UCUebersichtViewModel() : this(new List<KatalogItem>()) {}
         public UCUebersichtViewModel(List<KatalogItem> katalogItems)
         {
-            KatalogItems = katalogItems;
+            if (katalogItems.Count == 0)
+            {
+                if (KatalogItems == null)
+                {
+                    KatalogItems = generiereTestKatalogItemList();
+                }
+            }
+            else
+            {
+                KatalogItems = katalogItems;
+            }
+        }
+        private List<KatalogItem> generiereTestKatalogItemList()
+        {
+            return new List<KatalogItem>()
+            {
+                    new KatalogItem("Produkt 1", new MaßeTemplate(1,1,1), 1),
+                    new KatalogItem("Produkt 2", new MaßeTemplate(2,2,2), 2),
+                    new KatalogItem("Produkt 3", new MaßeTemplate(6,1,2), 1),
+                    new KatalogItem("Produkt 4", new MaßeTemplate(5,5,3), 2),
+                    new KatalogItem("Produkt 5", new MaßeTemplate(1,1,1), 2)
+            };
         }
 
     }

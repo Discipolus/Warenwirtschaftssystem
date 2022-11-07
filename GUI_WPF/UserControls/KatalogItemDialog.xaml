@@ -11,6 +11,26 @@
         <viewmodels:UCKatalogItemDialogViewModel/>
     </UserControl.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Label>Name</Label>
+            <Label>Name</Label>
+            <Label>Name</Label>
+            <Label>Name</Label>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBox>Test</TextBox>
+            <TextBox>Test</TextBox>
+            <TextBox>Test</TextBox>
+            <TextBox>Test</TextBox>
+        </StackPanel>
             
     </Grid>
 </UserControl>
