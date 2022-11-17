@@ -63,8 +63,9 @@
                 <Button>Einkauf</Button>
             </StackPanel>
         </ScrollViewer>
-        <ContentControl Content="{Binding SelectedView}" Grid.Column="1" Grid.RowSpan="2"/>
-
-
+        <Grid Grid.Column="1" Grid.RowSpan="2">
+            <ContentControl Content="{Binding SelectedView}"/>
+        </Grid>
+        
     </Grid>
 </Window>
