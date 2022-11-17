@@ -2,8 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GUI_WPF"
+             xmlns:usercontrols="clr-namespace:GUI_WPF.UserControls"
+             xmlns:view="clr-namespace:GUI_WPF.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type view:UCUebersichtViewModel}">
+                <usercontrols:Uebersicht/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type view:UCKatalogItemDialogViewModel}">
+                <usercontrols:KatalogItemDialog/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

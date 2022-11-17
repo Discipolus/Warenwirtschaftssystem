@@ -18,6 +18,8 @@ namespace GUI_WPF.ViewModels
 
         #endregion
 
+        public event EventHandler<NewEventArgs> addEvent;
+
         #region Propertys
 
         private string _textBoxName = "Name";
@@ -91,7 +93,8 @@ namespace GUI_WPF.ViewModels
         }
         private void onbtnHinzufuegenClick()
         {
-
+            KatalogItem item = new KatalogItem();
+            addEvent.Invoke(this, new NewEventArgs(item));
         }
         private void onBtnEntfernenClick()
         {

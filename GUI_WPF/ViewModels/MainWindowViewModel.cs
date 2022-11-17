@@ -169,8 +169,16 @@ namespace GUI_WPF.ViewModels
 
         private void OnBtnHinzufuegenClick()
         {
-            SelectedView = new UCKatalogItemDialogViewModel();
+            UCKatalogItemDialogViewModel tmpview = new UCKatalogItemDialogViewModel();
+            tmpview.addEvent += OnAddEvent;
+            SelectedView = tmpview;
         }
+
+        private void OnAddEvent(object sender, NewEventArgs e)
+        {
+            KatalogItem item = e.item;
+        }
+
         private void OnBtnEntfernenClick()
         {
             SelectedView = new UCKatalogItemDialogViewModel();
