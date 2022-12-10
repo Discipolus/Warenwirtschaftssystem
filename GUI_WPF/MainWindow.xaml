@@ -11,7 +11,7 @@
         FontFamily="Book Antiqua" FontSize="20">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-        <Style TargetType="{x:Type Button}">
+        <!--<Style TargetType="{x:Type Button}">
             <Setter Property="Control.Background" Value="{x:Null}" />
             <Setter Property="Control.BorderBrush" Value="{x:Null}" />
             <Setter Property="Padding" Value="10,10,0,10"/>
@@ -22,6 +22,22 @@
                     <Setter Property="Control.BorderBrush" Value="{x:Null}" />
                 </Trigger>
             </Style.Triggers>
+        </Style>-->
+        <Style x:Key="SidebarStyle" TargetType="StackPanel">
+            <Style.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Control.Background" Value="{x:Null}" />
+                    <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                    <Setter Property="Padding" Value="10,10,0,10"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Style.Triggers>
+                        <Trigger Property="Control.IsMouseOver" Value="True">
+                            <Setter Property="Control.Background" Value="{x:Null}" />
+                            <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Style.Resources>
         </Style>
         <DataTemplate DataType="{x:Type viewmodels:UCUebersichtViewModel}">
             <usercontrols:Uebersicht/>
@@ -44,7 +60,7 @@
         </Grid.ColumnDefinitions>
         <Image Grid.Row="0" Grid.Column="0" Source="C:\Users\Vincent\Pictures\Wallpaper\Unbenannt2.png" Height="200" />
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0">
-            <StackPanel>
+            <StackPanel Style="{StaticResource SidebarStyle}">
                 <Button Command="{Binding CommandBtnWarenlogistikClick}" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1" Content="Warenlogistik"/>
                 <StackPanel Visibility="{ Binding Path=SubMenueWarenlogistikVisibility, Converter={StaticResource BoolToVis}}">
                     <Button Padding="25,10,0,10" Command="{Binding CommandBtnUebersichtClick}" Content="Übersicht"/>
@@ -63,9 +79,6 @@
                 <Button>Einkauf</Button>
             </StackPanel>
         </ScrollViewer>
-        <Grid Grid.Column="1" Grid.RowSpan="2">
-            <ContentControl Content="{Binding SelectedView}"/>
-        </Grid>
-        
+        <ContentControl Margin="20,20,20,20" Grid.Column="1" Grid.RowSpan="2" Content="{Binding SelectedView}"/>
     </Grid>
 </Window>

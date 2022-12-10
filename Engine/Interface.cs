@@ -21,7 +21,18 @@ namespace Engine
             TestEngine engine = new TestEngine();
             wl = engine.wl;
         }
-
+        public void ProduktDemKatalogHinzufuegen(KatalogItem item)
+        {
+            if (wl.Katalog.Any(x => x.GUID == item.GUID))
+            {
+                string message = "item mit der GUID ist bereits im Katalog vorhanden. (" + item.GUID + ")";
+                Console.WriteLine(message);                
+            }
+            else
+            {
+                wl.Katalog.Add(item);
+            }
+        }
         public void ProduktAusKatalogEntfernen()
         {
 

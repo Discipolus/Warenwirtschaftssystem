@@ -1,4 +1,5 @@
 ﻿using Engine.Logik.Warenlogistik;
+using GUI_WPF.EventArgs;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace GUI_WPF.ViewModels
         //Liste od Observable Collection (wird als source erwartet. Objekte an listen binden und anzeigen) anzeigen. (listbox / itembox)
         //modelschicht - recherchieren. Infos einholen (niedrige Prio)
         //content presenter für View models in xaml
+
         #region DelegateCommands
 
         #region Menueleiste
@@ -142,10 +144,6 @@ namespace GUI_WPF.ViewModels
             CommandBtnAufstockenClick = new DelegateCommand(OnBtnAufstockenClick);
             CommandBtnAuslagernClick = new DelegateCommand(OnBtnAuslagernClick);
         }
-        //private void HideAllUserControls()
-        //{
-        //    UebersichtVisibility = false;
-        //}
 
 
         #region ButtonClickMethods
@@ -170,13 +168,18 @@ namespace GUI_WPF.ViewModels
         private void OnBtnHinzufuegenClick()
         {
             UCKatalogItemDialogViewModel tmpview = new UCKatalogItemDialogViewModel();
-            tmpview.addEvent += OnAddEvent;
+            tmpview.EventHandlerItemHinzufuegen += OnHinzufuegenEvent;
             SelectedView = tmpview;
         }
 
-        private void OnAddEvent(object sender, NewEventArgs e)
+        private void OnHinzufuegenEvent(object sender, KatalogItemHinzufuegenEventArgs e)
         {
-            KatalogItem item = e.item;
+            EngineInterface.ProduktDemKatalogHinzufuegen(e.Item);
+            KatalogItem item = e.Item;
+        }
+        private void OnEntfernenEvent(object sender, KatalogItemEntfernenEventArgs e)
+        {
+            Guid guid = e.GUID;
         }
 
         private void OnBtnEntfernenClick()
@@ -191,9 +194,6 @@ namespace GUI_WPF.ViewModels
         {
 
         }
-
-
-
         #endregion
 
     }

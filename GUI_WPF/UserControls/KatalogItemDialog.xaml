@@ -80,11 +80,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" HorizontalAlignment="Stretch" Height="30" >Neue Eingabe</Button>
-            <Button Grid.Column="1" HorizontalAlignment="Stretch" Height="30" >Entfernen</Button>
-            <Button Grid.Column="2" HorizontalAlignment="Stretch" Height="30" Command="{Binding CommandBtnHinzufuegenClick}">Hinzufügen</Button>
+            <Button Grid.Column="0" >Felder leeren</Button>
+            <Button Grid.Column="1" Command="{Binding CommandBtnHinzufuegenClick}">Hinzufügen</Button>
         </Grid>
     </Grid>
 </UserControl>

@@ -39,6 +39,7 @@ namespace Engine.Logik.Warenlogistik
             GUID = guid;
         }
         public KatalogItem(string name, MaßeTemplate maße, int lagerhausIndex) : this(name, maße, new List<int> { lagerhausIndex }, Guid.NewGuid()) {}
+        public KatalogItem(string name, MaßeTemplate maße, List<int> lagerhausIndex) : this(name, maße, lagerhausIndex , Guid.NewGuid()) { }
         public KatalogItem(string name, MaßeTemplate maße) : this(name, maße, new List<int>(), Guid.NewGuid()) {}
         public KatalogItem() : this("", new MaßeTemplate()) {}
 
