@@ -10,8 +10,11 @@
             <DataTemplate DataType="{x:Type view:UCUebersichtViewModel}">
                 <usercontrols:Uebersicht/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type view:UCKatalogItemDialogViewModel}">
-                <usercontrols:KatalogItemDialog/>
+            <DataTemplate DataType="{x:Type view:UCKatalogItemHinzufuegenDialogViewModel}">
+                <usercontrols:KatalogItemHinzufuegenDialog/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type view:UCKatalogItemEntfernenDialogViewModel}">
+                <usercontrols:KatalogItemEntfernenDialog/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

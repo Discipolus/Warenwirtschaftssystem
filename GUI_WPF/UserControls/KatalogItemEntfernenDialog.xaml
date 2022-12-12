@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.KatalogItemEntfernenDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:usercontrols="clr-namespace:GUI_WPF.UserControls"
+             xmlns:viewmodels="clr-namespace:GUI_WPF.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:Background="Aqua"
+             FontFamily="Book Antiqua" FontSize="16">
+    <d:UserControl.DataContext>
+        <viewmodels:UCKatalogItemEntfernenDialogViewModel/>
+    </d:UserControl.DataContext>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Control.Height" Value="30" />
+            <Setter Property="Control.Margin" Value="0,10,0,10" />
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="ItemsControl.Height" Value="50"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1">
+            <Label>Name:</Label>
+            <Label>Maße [m]:</Label>
+            <Label>
+                <TextBlock>Lagerhäuser mit diesem<LineBreak/> Item (Seperator ; ):</TextBlock>
+            </Label>
+            <Label HorizontalAlignment="Right">Guid:</Label>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBox Text="{Binding TextBoxName}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="0">
+                    <Label>x:</Label>
+                    <TextBox DockPanel.Dock="Right" Text="{Binding TextBoxMaßeX}"></TextBox>
+                </DockPanel>
+                <DockPanel Grid.Column="1">
+                    <Label>y:</Label>
+                    <TextBox DockPanel.Dock="Right" Text="{Binding TextBoxMaßeY}"/>
+                </DockPanel>
+                <DockPanel Grid.Column="2">
+                    <Label>z:</Label>
+                    <TextBox DockPanel.Dock="Right" Text="{Binding TextBoxMaßeZ}"/> 
+                </DockPanel>
+            </Grid>
+            <TextBox Text="{Binding TextBoxLagerhaeuser}"/>
+            <TextBox Text="{Binding TextBoxGuid}"/>
+        </StackPanel>
+        <Label Grid.Column="0"
+               Grid.Row="0"
+               Grid.ColumnSpan="2"
+               TextBlock.FontSize="30"
+               TextBlock.FontFamily="Book Antiqua"
+               HorizontalAlignment="Center"
+               TextElement.FontSize="30"
+               Height="50">
+            Katalog Item Entfernen
+        </Label>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" >Felder leeren</Button>
+            <Button Grid.Column="1" Command="{Binding CommandBtnHinzufuegenClick}">Entfernen</Button>
+        </Grid>
+    </Grid>
+</UserControl>

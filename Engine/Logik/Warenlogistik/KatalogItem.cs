@@ -21,7 +21,7 @@ namespace Engine.Logik.Warenlogistik
                 string s = "";
                 foreach (int i in LagerhäuserMitItem)
                 {
-                    s += i + " ";
+                    s += i + "; ";
                 }
                 return s;
             }
@@ -79,6 +79,11 @@ namespace Engine.Logik.Warenlogistik
             value += seperator + " " + String.Join("|", Maße);
             value += seperator + " " + String.Join(",", LagerhäuserMitItem);
             return value;
+        }
+        public string ToSqlValue()
+        {
+            //(Name, MaßeX, MaßeY, MaßeZ, Guid, Lagerhäuser)
+            return "('" + Name + "', " + Maße.X + ", " + Maße.Y + ", " + Maße.Z + ", '" + GUID.ToString() + "', '" + LagerhäuserMitItemString + "')";
         }
     }
 }

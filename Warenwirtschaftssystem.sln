@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GUI_WPF", "GUI_WPF\GUI_WPF.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engine", "Engine\Engine.csproj", "{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Datenbank", "Datenbank\Datenbank.sqlproj", "{287489C6-6636-4086-9A51-389E90968151}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +27,6 @@ Global
 		{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3290FD3A-4B8C-44B1-8E4D-D38B71D2A9B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{287489C6-6636-4086-9A51-389E90968151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{287489C6-6636-4086-9A51-389E90968151}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{287489C6-6636-4086-9A51-389E90968151}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{287489C6-6636-4086-9A51-389E90968151}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{287489C6-6636-4086-9A51-389E90968151}.Release|Any CPU.Build.0 = Release|Any CPU
-		{287489C6-6636-4086-9A51-389E90968151}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

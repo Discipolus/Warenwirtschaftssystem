@@ -1,5 +1,6 @@
 ﻿using Engine.Konstrukte;
 using Engine.Logik.Warenlogistik;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,8 @@ namespace GUI_WPF.ViewModels
 {
     public class UCUebersichtViewModel : Prism.Mvvm.BindableBase
     {
+        public DelegateCommand CommandBtnCopy { get; set; }
+
         #region Propertys
         //private ObservableCollection<KatalogItem>? _katalogDarstellung;
         //public ObservableCollection<KatalogItem>? KatalogDarstellung
@@ -45,6 +48,15 @@ namespace GUI_WPF.ViewModels
             {
                 KatalogItems = katalogItems;
             }
+            initialiseDelegates();
+        }
+        private void initialiseDelegates()
+        {
+            CommandBtnCopy = new DelegateCommand(obBtnCopyClick);
+        }
+        private void obBtnCopyClick()
+        {
+            
         }
         private List<KatalogItem> generiereTestKatalogItemList()
         {

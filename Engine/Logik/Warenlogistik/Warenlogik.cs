@@ -21,18 +21,16 @@ namespace Engine.Logik.Warenlogistik
 
     internal class Warenlogik
     {
-        //public SortedList<Guid, KatalogItem> katalog { get; set; }
         internal List<KatalogItem> Katalog { get; private set; }
-        internal List<Lagerhaus> Lagerhäuser { get; set; }
+        internal List<Lagerhaus> Lagerhäuser { get; private set; }
         internal Warenlogik()
         {
             LadeWarenkatalog();
             LadeLagerhäuser();
-
         }
         internal void LadeWarenkatalog()
         {
-            List<KatalogItem>? tmp = KatalogSpeichernLaden.KatalogLaden();
+            List<KatalogItem>? tmp = SpeichernLaden.KatalogLaden();
             if (tmp != null)
             {
                 Katalog = tmp;
@@ -44,7 +42,7 @@ namespace Engine.Logik.Warenlogistik
         }
         internal void LadeLagerhäuser()
         {
-            List<Lagerhaus>? tmp = KatalogSpeichernLaden.LagerhäuserLaden();
+            List<Lagerhaus>? tmp = SpeichernLaden.LagerhäuserLaden();
 
             if (tmp != null)
             {
@@ -59,30 +57,46 @@ namespace Engine.Logik.Warenlogistik
         //{
         //    Lagerhäuser.Add(new Lagerhaus(adresse, Lagerhäuser.Count, lagereinheiten));
         //}
-        internal void KatalogItemDemKatalogHinzufuegen(string name, MaßeTemplate maße, int lagerhausindex, int anzahl)
-        {
-            KatalogItem katalogItem;
-            if (Lagerhäuser.Find(x => x.Index == lagerhausindex) != null)
-            {
-                katalogItem = new KatalogItem(name, maße, lagerhausindex);
-                Lagerhäuser.Find(x => x.Index == lagerhausindex).LagerAufstocken(katalogItem.GUID, katalogItem.Größenklasse, anzahl);
-            }
-            else            
-            {
-                katalogItem = new KatalogItem(name, maße);
-                Console.WriteLine("Lagerhausindex nicht gefunden. Produkt wird nur dem Katalog hinzugefügt.");                
-                katalogItem.LagerhäuserMitItem.Remove(lagerhausindex);
-            }
-            Katalog.Add(katalogItem);
-        }
-        internal void KatalogItemDemKatalogHinzufuegen(KatalogItem ki)
+        //internal void KatalogItemDemKatalogHinzufuegen(string name, MaßeTemplate maße, int lagerhausindex, int anzahl)
+        //{
+        //    KatalogItem katalogItem;
+        //    if (Lagerhäuser.Find(x => x.Index == lagerhausindex) != null)
+        //    {
+        //        katalogItem = new KatalogItem(name, maße, lagerhausindex);
+        //        Lagerhäuser.Find(x => x.Index == lagerhausindex).LagerAufstocken(katalogItem.GUID, katalogItem.Größenklasse, anzahl);
+        //    }
+        //    else            
+        //    {
+        //        katalogItem = new KatalogItem(name, maße);
+        //        Console.WriteLine("Lagerhausindex nicht gefunden. Produkt wird nur dem Katalog hinzugefügt.");                
+        //        katalogItem.LagerhäuserMitItem.Remove(lagerhausindex);
+        //    }
+        //    Katalog.Add(katalogItem);
+        //}
+        internal void KatalogItemHinzufuegen(KatalogItem ki)
         {
             Katalog.Add(ki);
+            SpeichernLaden.KatalogSpeichern(Katalog);
         }
-        internal void KatalogItemDemKatalogHinzufuegen(string name, MaßeTemplate maße)
+        internal void KatalogItemEntfernen(KatalogItem ki)
         {
-            Katalog.Add(new KatalogItem(name, maße));
+            Katalog.Remove(ki);
+            SpeichernLaden.KatalogSpeichern(Katalog);
         }
+        internal void LagerhausHinzufuegen(Lagerhaus la)
+        {
+            Lagerhäuser.Add(la);
+            SpeichernLaden.LagerhäuserSpeichern(Lagerhäuser);
+        }
+        internal void LagerhausEntfernen(Lagerhaus la)
+        {
+            Lagerhäuser.Remove(la);
+            SpeichernLaden.LagerhäuserSpeichern(Lagerhäuser);
+        }
+        //internal void KatalogItemDemKatalogHinzufuegen(string name, MaßeTemplate maße)
+        //{
+        //    Katalog.Add(new KatalogItem(name, maße));
+        //}
         internal void LagerAufstocken(Guid katalogItemGuid, int lagerhausIndex, int anzahl)
         {
             KatalogItem? ki = Katalog.Find(x => x.GUID == katalogItemGuid);

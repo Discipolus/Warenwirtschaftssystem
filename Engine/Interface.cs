@@ -3,6 +3,7 @@ using Engine.Logik.Warenlogistik;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,12 +31,21 @@ namespace Engine
             }
             else
             {
-                wl.Katalog.Add(item);
+                wl.KatalogItemHinzufuegen(item);
             }
         }
-        public void ProduktAusKatalogEntfernen()
+        public void ProduktAusKatalogEntfernen(Guid GUID)
         {
-
+            KatalogItem? item = wl.Katalog.Find(x => x.GUID == GUID);
+            if (item != null)
+            {
+                wl.KatalogItemEntfernen(item);
+            }
+            else
+            {
+                string message = "Item mit der Guid: " + GUID.ToString() + " konnte nicht im Katalog gefunden, also auch nicht entfernt werden.";
+                Console.WriteLine(message);                
+            }
         }
         public List<string[]> GetKatalog()
         {

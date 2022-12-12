@@ -167,7 +167,7 @@ namespace GUI_WPF.ViewModels
 
         private void OnBtnHinzufuegenClick()
         {
-            UCKatalogItemDialogViewModel tmpview = new UCKatalogItemDialogViewModel();
+            UCKatalogItemHinzufuegenDialogViewModel tmpview = new UCKatalogItemHinzufuegenDialogViewModel();
             tmpview.EventHandlerItemHinzufuegen += OnHinzufuegenEvent;
             SelectedView = tmpview;
         }
@@ -179,12 +179,15 @@ namespace GUI_WPF.ViewModels
         }
         private void OnEntfernenEvent(object sender, KatalogItemEntfernenEventArgs e)
         {
+            EngineInterface.ProduktAusKatalogEntfernen(e.GUID);
             Guid guid = e.GUID;
         }
 
         private void OnBtnEntfernenClick()
         {
-            SelectedView = new UCKatalogItemDialogViewModel();
+            UCKatalogItemEntfernenDialogViewModel tmpview = new UCKatalogItemEntfernenDialogViewModel();
+            tmpview.EventHandlerItemEntfernen += OnEntfernenEvent;
+            SelectedView = tmpview;
         }
         private void OnBtnAufstockenClick()
         {

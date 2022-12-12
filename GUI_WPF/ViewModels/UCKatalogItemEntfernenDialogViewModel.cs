@@ -13,7 +13,7 @@ using System.Windows.Controls;
 
 namespace GUI_WPF.ViewModels
 {
-    public class UCKatalogItemDialogViewModel : Prism.Mvvm.BindableBase
+    public class UCKatalogItemEntfernenDialogViewModel : Prism.Mvvm.BindableBase
     {
         #region Delegate Commands
         public DelegateCommand CommandBtnHinzufuegenClick { get; set; }
@@ -22,7 +22,6 @@ namespace GUI_WPF.ViewModels
 
         #endregion
 
-        public event EventHandler<KatalogItemHinzufuegenEventArgs> EventHandlerItemHinzufuegen;
         public event EventHandler<KatalogItemEntfernenEventArgs> EventHandlerItemEntfernen;
 
         #region Propertys
@@ -86,7 +85,7 @@ namespace GUI_WPF.ViewModels
         }
 
         #endregion
-        public UCKatalogItemDialogViewModel()
+        public UCKatalogItemEntfernenDialogViewModel()
         {
             initializeDelegates();
             fillVariables();
@@ -102,83 +101,20 @@ namespace GUI_WPF.ViewModels
         }
         private void initializeDelegates()
         {
-            CommandBtnHinzufuegenClick = new DelegateCommand(onbtnHinzufuegenClick);
             CommandBtnEntfernenClick = new DelegateCommand(onBtnEntfernenClick);
             CommandBtnNeueEingabeClick = new DelegateCommand(onBtnNeueEingabeClick);
         }
-        private KatalogItem? extractItem()
-        {
-            KatalogItem? item = null;
-            MaßeTemplate? maße = getMaßeFromTextBox();
-            List<int> lagerhäuser = getLagerhaeuserIndizesFromTextBox();
-            Guid guid = getGuidFromTextbox();
-            if (TextBoxName.Length > 0 && maße != null)
-            {
-                item = new KatalogItem(TextBoxName, maße, lagerhäuser, guid);             
-            }
-            else
-            {
-                string message = "Error occured: Name or Maße has an invalid value.";
-                MessageBox.Show(message);
-                Console.WriteLine(message);
-            }
-            return item;
-        }
-        private void onbtnHinzufuegenClick()
-        {
-            KatalogItem? item = extractItem();
-            if (item != null)
-            {
-                EventHandlerItemHinzufuegen.Invoke(this, new KatalogItemHinzufuegenEventArgs(item));
-            }
-
-        }
         private void onBtnEntfernenClick()
         {
-            Guid guid = getGuidFromTextbox();
-            if (guid != Guid.Empty)
+            Guid GUID = getGuidFromTextbox();
+            if (GUID != Guid.Empty)
             {
-                EventHandlerItemEntfernen.Invoke(this, new KatalogItemEntfernenEventArgs(guid));
+                EventHandlerItemEntfernen.Invoke(this, new KatalogItemEntfernenEventArgs(GUID));
             }
         }
         private void onBtnNeueEingabeClick()
         {
 
-        }
-        private MaßeTemplate? getMaßeFromTextBox()
-        {
-            try
-            {
-                return new MaßeTemplate(
-                    Convert.ToDouble(TextBoxMaßeX),
-                    Convert.ToDouble(TextBoxMaßeY),
-                    Convert.ToDouble(TextBoxMaßeZ)
-                    );
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-        }
-        private List<int> getLagerhaeuserIndizesFromTextBox()
-        {
-            List<int> rueckgabe = new List<int>();
-            if (TextBoxLagerhaeuser.Length > 0)
-            {
-                foreach (string s in TextBoxLagerhaeuser.Split(';'))
-                {
-                    try
-                    {
-                        rueckgabe.Add(Convert.ToInt32(s));
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-            }
-            return rueckgabe;
         }
         private Guid getGuidFromTextbox()
         {

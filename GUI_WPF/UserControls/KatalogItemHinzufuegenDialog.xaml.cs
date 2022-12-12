@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GUI_WPF.UserControls
 {
     /// <summary>
-    /// Interaktionslogik für KatalogItemDialog.xaml
+    /// Interaktionslogik für KatalogItemHinzufuegenDialog.xaml
     /// </summary>
-    public partial class KatalogItemDialog : UserControl
+    public partial class KatalogItemHinzufuegenDialog : UserControl
     {
-        public KatalogItemDialog()
+        public KatalogItemHinzufuegenDialog()
         {
             InitializeComponent();
         }

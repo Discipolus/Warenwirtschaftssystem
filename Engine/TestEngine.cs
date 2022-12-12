@@ -9,12 +9,12 @@ namespace Engine
         internal Warenlogik wl = new Warenlogik();
         public TestEngine()
         {
-            wl.Lagerhäuser.Add(generiereLagerhaus());
+            wl.LagerhausHinzufuegen(generiereLagerhaus());
             generiereKatalog();
             
             wl.LagerAufstocken(wl.Katalog[0].GUID, 0, 9);
-            KatalogSpeichernLaden.LagerhäuserSpeichern(wl.Lagerhäuser); ;
-            KatalogSpeichernLaden.KatalogSpeichern(wl.Katalog);
+            SpeichernLaden.LagerhäuserSpeichern(wl.Lagerhäuser); ;
+            SpeichernLaden.KatalogSpeichern(wl.Katalog);
         }
         #region testmethoden
         private Lagerhaus generiereLagerhaus()
@@ -43,7 +43,7 @@ namespace Engine
             for (int i = 0; i < 5; i++)
             {
                 KatalogItem ki = new KatalogItem("Produkt " + i, new MaßeTemplate( 2, 2, 2 ));
-                wl.KatalogItemDemKatalogHinzufuegen(ki);
+                wl.KatalogItemHinzufuegen(ki);
             }
 
             return Katalog;
