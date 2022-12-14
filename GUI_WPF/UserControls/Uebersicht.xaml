@@ -10,9 +10,19 @@
     <UserControl.DataContext>
         <viewmodels:UCUebersichtViewModel/>
     </UserControl.DataContext>
-    <Grid>
-        <ListView x:Name="UebersichtListe" ItemsSource="{Binding KatalogItems}">
-            <ListView.View>
+    <DataGrid ItemsSource="{Binding KatalogItems}" SelectedItem="{Binding SelectedKatalogItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem
+                        Header="Copy"
+                        Command="{Binding CommandBtnCopy}"
+                        CommandParameter="{Binding ElementName=UebersichtListe, Path=SelectedItem}"
+                        />
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+    </DataGrid>
+        <!--<ListView x:Name="UebersichtListe" ItemsSource="{Binding KatalogItems}">        
+            <ListView.View>                
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Maße [m]" DisplayMemberBinding="{Binding Maße}"/>
@@ -23,13 +33,20 @@
             </ListView.View>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Name}" Margin="3,0"/>
-                        <ListView ItemsSource="{Binding Maße}"/>
+                        <TextBlock Text="{Binding Maße}" />
                         <TextBlock Text="{Binding Größenklasse}" />
                         <ListView ItemsSource="{Binding LagerhäuserMitItem}" />
                         <TextBlock Text="{Binding GUID}" />
-                    </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ContextMenu>
@@ -41,6 +58,6 @@
                         />
                 </ContextMenu>
             </ListView.ContextMenu>
-        </ListView>
-    </Grid>
+        </ListView>-->
+    
 </UserControl>

@@ -15,8 +15,8 @@ namespace Engine.Logik.Warenlogistik
     {
         private static readonly string DateinameKatalog = "Katalog.xml";
         private static readonly string DateinameLagerhäuser = "Lagerhäuser.xml";
-        private static readonly string connectionString = @"Data Source=BIGGREEN;Initial Catalog=WWSystem;User ID=WWSystemZugriff;Password=AbC12Test";
-        //private static readonly string connectionString = @"Data Source=FVTOGNB0146;Initial Catalog=WWSystem;User ID=WWSystemZugriff;Password=AbC12Test"; //FVTOGNB0146\SQLEXPRESS
+        //private static readonly string connectionString = @"Data Source=BIGGREEN;Initial Catalog=WWSystem;User ID=WWSystemZugriff;Password=AbC12Test";
+        private static readonly string connectionString = @"Data Source=FVTOGNB0146\SQLEXPRESS;Initial Catalog=WWSystem; Integrated Security=true"; //FVTOGNB0146\SQLEXPRESS
         private static SqlConnection conn = new SqlConnection(connectionString);
 
         static SpeichernLaden()
@@ -63,8 +63,8 @@ namespace Engine.Logik.Warenlogistik
         }
         internal static List<KatalogItem>? KatalogLaden()
         {
-            try
-            {
+            //try
+            //{
                 string sql = "Select * from Produkte";
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -90,13 +90,13 @@ namespace Engine.Logik.Warenlogistik
                     list.Add(new KatalogItem(name, maße, lagerhäuser, GUID));
                 }
                 return list;
-            }
-            catch
-            {
-                string message = "Katalog konnte nicht aus SQL Datenbank geladen werden. Versuche lokale Datei zu laden.";
-                Console.WriteLine(message);
-                return Laden<List<KatalogItem>>(DateinameKatalog);
-            }
+            //}
+            //catch
+            //{
+            //    string message = "Katalog konnte nicht aus SQL Datenbank geladen werden. Versuche lokale Datei zu laden.";
+            //    Console.WriteLine(message);
+            //    return Laden<List<KatalogItem>>(DateinameKatalog);
+            //}
         }
         internal static List<Lagerhaus>? LagerhäuserLaden()
         {

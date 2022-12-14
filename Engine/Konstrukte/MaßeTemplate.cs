@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Engine.Konstrukte
 {
-    public class MaßeTemplate
+    public class MaßeTemplate : IEditableObject
     {
         #region Propertys
         public double X { get; set; }

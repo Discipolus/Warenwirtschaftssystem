@@ -1,32 +1,43 @@
 ﻿using Engine.Konstrukte;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Engine.Logik.Warenlogistik
 {
-    public class KatalogItem
+    public class KatalogItem : IEditableObject
     {
         #region Variables
+
         public string Name { get; set; }
         public MaßeTemplate Maße { get; set; }
-        public LagerEinheitGröße Größenklasse { get; set;}
+        public LagerEinheitGröße Größenklasse { get; set; }
+        public Guid GUID { get; set; }
         public List<int> LagerhäuserMitItem { get; set; }
         public string LagerhäuserMitItemString
-        { 
+        {
             get
             {
                 string s = "";
-                foreach (int i in LagerhäuserMitItem)
+                if (LagerhäuserMitItem.Count > 0)
                 {
-                    s += i + "; ";
+                    s += LagerhäuserMitItem[0].ToString();
+                    for (int i = 1; i < LagerhäuserMitItem.Count; i++)
+                    {
+                        s += "; " + LagerhäuserMitItem[i].ToString();
+                    }
                 }
                 return s;
             }
         }
-        public Guid GUID { get; set; }
+
+        private KatalogItem? backupData;
+        private bool inBearbeitung = false;
+        private List<KatalogItem> parent;
+
         #endregion
 
         #region Konstruktoren
@@ -38,10 +49,10 @@ namespace Engine.Logik.Warenlogistik
             Größenklasse = getGrößenklasseFromMaße(Maße);
             GUID = guid;
         }
-        public KatalogItem(string name, MaßeTemplate maße, int lagerhausIndex) : this(name, maße, new List<int> { lagerhausIndex }, Guid.NewGuid()) {}
-        public KatalogItem(string name, MaßeTemplate maße, List<int> lagerhausIndex) : this(name, maße, lagerhausIndex , Guid.NewGuid()) { }
-        public KatalogItem(string name, MaßeTemplate maße) : this(name, maße, new List<int>(), Guid.NewGuid()) {}
-        public KatalogItem() : this("", new MaßeTemplate()) {}
+        public KatalogItem(string name, MaßeTemplate maße, int lagerhausIndex) : this(name, maße, new List<int> { lagerhausIndex }, Guid.NewGuid()) { }
+        public KatalogItem(string name, MaßeTemplate maße, List<int> lagerhausIndex) : this(name, maße, lagerhausIndex, Guid.NewGuid()) { }
+        public KatalogItem(string name, MaßeTemplate maße) : this(name, maße, new List<int>(), Guid.NewGuid()) { }
+        public KatalogItem() : this("", new MaßeTemplate()) { }
 
         #endregion
 
@@ -52,7 +63,19 @@ namespace Engine.Logik.Warenlogistik
         public static LagerEinheitGröße getGrößenklasseFromMaße(MaßeTemplate maße)
         {
             //zu implementieren
-            return LagerEinheitGröße.klein;
+            double maxLänge = maße.ToArray().Max();
+            if (maxLänge < 10)
+            {
+                return LagerEinheitGröße.klein;
+            }
+            else if (maxLänge < 20)
+            {
+                return LagerEinheitGröße.mittel;
+            }
+            else
+            {
+                return LagerEinheitGröße.groß;
+            }
         }
         public override string ToString()
         {
@@ -85,5 +108,32 @@ namespace Engine.Logik.Warenlogistik
             //(Name, MaßeX, MaßeY, MaßeZ, Guid, Lagerhäuser)
             return "('" + Name + "', " + Maße.X + ", " + Maße.Y + ", " + Maße.Z + ", '" + GUID.ToString() + "', '" + LagerhäuserMitItemString + "')";
         }
+        public void BeginEdit()
+        {
+            if (!inBearbeitung)
+            {
+                inBearbeitung = true;
+                this.backupData = new KatalogItem(this.Name, this.Maße, this.LagerhäuserMitItem, this.GUID);
+            }
+        }
+        public void CancelEdit()
+        {
+            if (inBearbeitung)
+            {
+                this.Name = this.backupData.Name;
+                this.Maße = this.backupData.Maße;
+                this.LagerhäuserMitItem = this.backupData.LagerhäuserMitItem;
+                this.GUID = this.backupData.GUID;
+                inBearbeitung = false;
+            }
+        }
+        public void EndEdit()
+        {
+            if (inBearbeitung)
+            {
+                this.backupData = null;
+                inBearbeitung = false;
+            }
+        }        
     }
 }
