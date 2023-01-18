@@ -16,6 +16,9 @@
             <DataTemplate DataType="{x:Type view:UCKatalogItemEntfernenDialogViewModel}">
                 <usercontrols:KatalogItemEntfernenDialog/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type view:KatalogItemListItemViewModel}">
+                <usercontrols:KatalogItemListItem/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
