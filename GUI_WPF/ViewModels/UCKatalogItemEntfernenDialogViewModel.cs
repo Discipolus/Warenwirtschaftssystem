@@ -13,7 +13,7 @@ using System.Windows.Controls;
 
 namespace GUI_WPF.ViewModels
 {
-    public class UCKatalogItemEntfernenDialogViewModel : Prism.Mvvm.BindableBase
+    public class UCKatalogItemEntfernenDialogViewModel : MyBase//Prism.Mvvm.BindableBase
     {
         #region Delegate Commands
         public DelegateCommand CommandBtnHinzufuegenClick { get; set; }

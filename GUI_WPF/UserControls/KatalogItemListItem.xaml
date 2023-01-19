@@ -6,11 +6,53 @@
              xmlns:usercontrols="clr-namespace:GUI_WPF.UserControls"
              xmlns:viewmodels="clr-namespace:GUI_WPF.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="50"
+             d:DesignWidth="800"
+             d:Background="Gray"
+             FontFamily="Book Antiqua" FontSize="16">
     <d:UserControl.DataContext>
-        <viewmodels:UCKatalogItemEntfernenDialogViewModel/>
+        <viewmodels:KatalogItemListItemViewModel/>
     </d:UserControl.DataContext>
-    <Grid>
-            
+    <d:UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </d:UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        <Label 
+            Grid.Row="1"            
+            Content="936DA01F - 9ABD - 4D9D - 80C7 - 02AF85C822A8"
+            />        
+        <!--Content="{Binding KatalogItem.GUID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding KatalogItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Column="1" Text="{Binding KatalogItem.Größenklasse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Column="2" Text="{Binding KatalogItem.Maße, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Column="3" Text="{Binding KatalogItem.LagerhäuserMitItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>            
+        </Grid>
+
+        
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Visibility="{Binding Editmode}" Content="annehmen"/>
+            <Button Grid.Column="1" Visibility="{Binding Editmode}" Content="verwerfen"/>
+            <Button Grid.Column="2" Visibility="{Binding Editmode}" Content="Element löschen"/>
+        </Grid>
     </Grid>
 </UserControl>

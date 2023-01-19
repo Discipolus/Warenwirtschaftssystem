@@ -10,7 +10,7 @@
     <UserControl.DataContext>
         <viewmodels:UCUebersichtViewModel/>
     </UserControl.DataContext>
-    <DataGrid ItemsSource="{Binding KatalogItems}" SelectedItem="{Binding SelectedKatalogItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    <DataGrid ItemsSource="{Binding}" SelectedItem="{Binding SelectedKatalogItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <DataGrid.ContextMenu>
             <ContextMenu>
                 <MenuItem

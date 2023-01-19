@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GUI_WPF.ViewModels
 {
-    public class MainWindowViewModel : Prism.Mvvm.BindableBase
+    public class MainWindowViewModel : MyBase //Prism.Mvvm.BindableBase
     {
         //Liste od Observable Collection (wird als source erwartet. Objekte an listen binden und anzeigen) anzeigen. (listbox / itembox)
         //modelschicht - recherchieren. Infos einholen (niedrige Prio)
@@ -107,8 +107,8 @@ namespace GUI_WPF.ViewModels
         }
 
 
-        private Prism.Mvvm.BindableBase? _selectedView;
-        public Prism.Mvvm.BindableBase? SelectedView
+        private MyBase? _selectedView;
+        public MyBase? SelectedView
         {
             get => _selectedView;
             set

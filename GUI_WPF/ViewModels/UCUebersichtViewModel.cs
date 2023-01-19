@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GUI_WPF.ViewModels
 {
-    public class UCUebersichtViewModel : Prism.Mvvm.BindableBase
+    public class UCUebersichtViewModel : MyBase
     {
         public DelegateCommand CommandBtnCopy { get; set; }
 
@@ -46,6 +46,10 @@ namespace GUI_WPF.ViewModels
             }
             else
             {
+                foreach (KatalogItem item in katalogItems)
+                {
+                    Add(item);
+                }
                 KatalogItems = katalogItems;
             }
             initialiseDelegates();

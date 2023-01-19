@@ -52,6 +52,7 @@ namespace Engine.Logik.Warenlogistik
         public KatalogItem(string name, MaßeTemplate maße, int lagerhausIndex) : this(name, maße, new List<int> { lagerhausIndex }, Guid.NewGuid()) { }
         public KatalogItem(string name, MaßeTemplate maße, List<int> lagerhausIndex) : this(name, maße, lagerhausIndex, Guid.NewGuid()) { }
         public KatalogItem(string name, MaßeTemplate maße) : this(name, maße, new List<int>(), Guid.NewGuid()) { }
+        public KatalogItem(KatalogItem item) : this(item.Name, item.Maße, item.LagerhäuserMitItem, item.GUID) { }
         public KatalogItem() : this("", new MaßeTemplate()) { }
 
         #endregion
@@ -113,7 +114,7 @@ namespace Engine.Logik.Warenlogistik
             if (!inBearbeitung)
             {
                 inBearbeitung = true;
-                this.backupData = new KatalogItem(this.Name, this.Maße, this.LagerhäuserMitItem, this.GUID);
+                this.backupData = new KatalogItem(this);
             }
         }
         public void CancelEdit()
